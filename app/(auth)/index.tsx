@@ -1,6 +1,7 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import AuthForm from "@/src/components/AuthForm";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import { useStore } from "@/src/store/store";
 import { TAuth } from "@/src/utils/type";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -37,6 +38,9 @@ const SignUp = () => {
 
     router.replace("/(tabs)/cards");
   };
+
+  const userName = useStore.getState().userName;
+  console.log("userName >>>", userName);
 
   return (
     <SafeAreaView style={styles.safeAreaView}>

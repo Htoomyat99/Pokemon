@@ -1,6 +1,7 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import AuthForm from "@/src/components/AuthForm";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import { useStore } from "@/src/store/store";
 import { TAuth } from "@/src/utils/type";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
@@ -36,6 +37,8 @@ const SignUp = () => {
     }
 
     router.replace("/(tabs)/cards");
+    useStore.getState().setUserName(userName);
+    useStore.getState().setPassword(password);
   };
 
   return (
