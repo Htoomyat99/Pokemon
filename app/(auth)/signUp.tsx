@@ -21,15 +21,15 @@ const SignUp = () => {
   const router = useRouter();
   const [visible, setVisible] = useState(false);
 
-  const goRegister = () => {
-    router.navigate("/(auth)/signUp");
+  const goLogin = () => {
+    router.navigate("/(auth)/");
   };
 
   const hideModal = () => {
     setVisible(false);
   };
 
-  const handleLogin = ({ userName, password }: TAuth) => {
+  const handleRegister = ({ userName, password }: TAuth) => {
     if (!userName || !password) {
       setVisible(true);
       return;
@@ -56,18 +56,18 @@ const SignUp = () => {
             />
           </View>
 
-          <Text style={styles.headerText}>Login Now</Text>
+          <Text style={styles.headerText}>Register Now</Text>
 
           <Text style={styles.descText}>
             Please enter the details below to continue
           </Text>
 
-          <AuthForm btnAction={handleLogin} buttonText="LOGIN" />
+          <AuthForm btnAction={handleRegister} buttonText="SignUp" />
 
           <Text style={styles.footerText}>
-            Don't have an account!{" "}
-            <Text onPress={goRegister} style={{ color: "#C8A20E" }}>
-              Register
+            Already have an account!{" "}
+            <Text onPress={goLogin} style={{ color: "#C8A20E" }}>
+              Login
             </Text>
           </Text>
 
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.sm,
     textAlign: "center",
     color: colors.textMuted,
-    marginTop: verticalScale(8),
+    marginTop: verticalScale(5),
     marginHorizontal: screenPadding.horizontal,
   },
   footerText: {
