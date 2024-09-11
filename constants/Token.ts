@@ -5,7 +5,7 @@ export const colors = {
   background: "#FFFFFF",
   text: "#000000",
   textMuted: "#BBBBBB",
-  icon: "#FFFFFF",
+  icon: "#000000",
   secondary: "#f0f1f0",
   error: "#C0101F",
 };
