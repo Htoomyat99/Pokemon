@@ -1,10 +1,11 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import AuthForm from "@/src/components/AuthForm";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import { useSession } from "@/src/providers/SessionPrvoider";
 import { useStore } from "@/src/store/store";
-import { TAuth } from "@/src/utils/type";
+import { TAuthError, TUser } from "@/src/utils/type";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Image,
   KeyboardAvoidingView,
@@ -20,25 +21,37 @@ import { scale, verticalScale } from "react-native-size-matters";
 
 const SignUp = () => {
   const router = useRouter();
-  const [visible, setVisible] = useState(false);
+  const [errModal, setErrModal] = useState<TAuthError>({ status: false });
+  const { signUp } = useSession();
 
   const goLogin = () => {
     router.navigate("/(auth)/");
   };
 
   const hideModal = () => {
-    setVisible(false);
+    setErrModal({ status: false });
   };
 
-  const handleRegister = ({ userName, password }: TAuth) => {
+  const handleRegister = ({ userName, password }: TUser) => {
     if (!userName || !password) {
-      setVisible(true);
+      setErrModal({
+        status: true,
+        errMsg: "Please enter username and password",
+      });
       return;
     }
 
-    router.replace("/(tabs)/cards");
-    useStore.getState().setUserName(userName);
-    useStore.getState().setPassword(password);
+    if (password.length < 6) {
+      setErrModal({
+        status: true,
+        errMsg: "Password must be at least 6 characters",
+      });
+      return;
+    }
+
+    useStore.getState().setUser({ userName, password });
+    signUp();
+    router.push("/(tabs)/cards");
   };
 
   return (
@@ -75,8 +88,7 @@ const SignUp = () => {
           </Text>
 
           <ErrorAlertModal
-            visible={visible}
-            errorText="Please enter username and password"
+            errModal={{ status: errModal.status, errMsg: errModal.errMsg }}
             hideModal={hideModal}
           />
         </ScrollView>

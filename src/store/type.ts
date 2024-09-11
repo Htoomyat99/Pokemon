@@ -1,11 +1,11 @@
+import { TUser } from "../utils/type";
+
 export interface SetType {
   (nextStateOrUpdater: (state: StoreState) => void): void;
 }
-export interface UserType {
-  userName: string;
-  setUserName: (data: string) => void;
-  password: string;
-  setPassword: (data: string) => void;
+export interface AuthStateType {
+  user: TUser;
+  setUser: (newUser: TUser) => void;
 }
 
-export type StoreState = UserType;
+export type StoreState = AuthStateType;

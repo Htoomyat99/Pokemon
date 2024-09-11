@@ -1,5 +1,7 @@
+import { SessionProvider } from "@/src/providers/SessionPrvoider";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Slot } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
@@ -8,6 +10,8 @@ import "react-native-reanimated";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const queryClient = new QueryClient();
+
   const [loaded] = useFonts({
     InterRegular: require("@/assets/fonts/Inter-Regular.ttf"),
     InterMedium: require("@/assets/fonts/Inter-Medium.ttf"),
@@ -26,9 +30,10 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(auth)" />
-      <Stack.Screen name="(tabs)" />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <SessionProvider>
+        <Slot />
+      </SessionProvider>
+    </QueryClientProvider>
   );
 }

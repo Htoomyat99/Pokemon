@@ -1,10 +1,20 @@
 import { colors } from "@/constants/Token";
+import { useSession } from "@/src/providers/SessionPrvoider";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Tabs } from "expo-router";
-import { Platform } from "react-native";
+import { Redirect, Tabs } from "expo-router";
+import { ActivityIndicator, Platform } from "react-native";
 import { moderateScale, verticalScale } from "react-native-size-matters";
 
 const TabLayout = () => {
+  const { session, isLoading } = useSession();
+
+  if (isLoading)
+    return <ActivityIndicator size={"small"} color={colors.text} />;
+
+  if (!session) {
+    return <Redirect href={"/(auth)/"} />;
+  }
+
   return (
     <Tabs
       screenOptions={{

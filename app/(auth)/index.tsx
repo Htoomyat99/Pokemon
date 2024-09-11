@@ -1,10 +1,11 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import AuthForm from "@/src/components/AuthForm";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import { useSession } from "@/src/providers/SessionPrvoider";
 import { useStore } from "@/src/store/store";
-import { TAuth } from "@/src/utils/type";
+import { TAuthError, TUser } from "@/src/utils/type";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Image,
   KeyboardAvoidingView,
@@ -20,27 +21,53 @@ import { scale, verticalScale } from "react-native-size-matters";
 
 const SignUp = () => {
   const router = useRouter();
-  const [visible, setVisible] = useState(false);
+
+  const { signIn } = useSession();
+  const existingUser = useStore.getState().user;
+
+  const [errModal, setErrModal] = useState<TAuthError>({ status: false });
 
   const goRegister = () => {
     router.navigate("/(auth)/signUp");
   };
 
   const hideModal = () => {
-    setVisible(false);
+    setErrModal({
+      status: false,
+    });
   };
 
-  const handleLogin = ({ userName, password }: TAuth) => {
+  const handleLogin = ({ userName, password }: TUser) => {
     if (!userName || !password) {
-      setVisible(true);
+      setErrModal({
+        status: true,
+        errMsg: "Please enter username and password",
+      });
       return;
     }
 
-    router.replace("/(tabs)/cards");
-  };
+    if (existingUser.userName === "" && existingUser.password === "") {
+      setErrModal({
+        status: true,
+        errMsg: "Please register first",
+      });
+      return;
+    }
 
-  const userName = useStore.getState().userName;
-  console.log("userName >>>", userName);
+    if (
+      userName !== existingUser.userName ||
+      password !== existingUser.password
+    ) {
+      setErrModal({
+        status: true,
+        errMsg: "Please enter correct username and password",
+      });
+      return;
+    }
+
+    signIn();
+    router.push("/(tabs)/cards");
+  };
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -76,8 +103,7 @@ const SignUp = () => {
           </Text>
 
           <ErrorAlertModal
-            visible={visible}
-            errorText="Please enter username and password"
+            errModal={{ status: errModal.status, errMsg: errModal.errMsg }}
             hideModal={hideModal}
           />
         </ScrollView>

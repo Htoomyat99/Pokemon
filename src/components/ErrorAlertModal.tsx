@@ -1,7 +1,6 @@
 import { colors, fontSize } from "@/constants/Token";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { BlurView } from "expo-blur";
-import React from "react";
 import {
   Modal,
   Pressable,
@@ -11,17 +10,17 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { TAuthError } from "../utils/type";
 
 interface Props {
   hideModal: () => void;
-  errorText: string;
-  visible: boolean;
+  errModal: TAuthError;
 }
 
-const ErrorAlertModal = ({ hideModal, errorText, visible }: Props) => {
+const ErrorAlertModal = ({ hideModal, errModal }: Props) => {
   return (
     <Modal
-      visible={visible}
+      visible={errModal.status}
       onDismiss={hideModal}
       transparent={true}
       animationType="fade"
@@ -46,7 +45,7 @@ const ErrorAlertModal = ({ hideModal, errorText, visible }: Props) => {
 
             <View style={styles.divider} />
 
-            <Text style={styles.errText}>{errorText}</Text>
+            <Text style={styles.errText}>{errModal.errMsg}</Text>
 
             <Pressable style={styles.btnContainer} onPress={hideModal}>
               <Text style={styles.btnText}>Got it</Text>
