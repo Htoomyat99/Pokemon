@@ -1,26 +1,22 @@
 import { colors, fontSize } from "@/constants/Token";
+import { useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
-const FilterList = () => {
-  const data = [
-    { id: 1, name: "Fire" },
-    { id: 2, name: "Water" },
-    { id: 3, name: "Electric" },
-    { id: 4, name: "Grass" },
-    { id: 5, name: "Ice" },
-  ];
-
+const FilterList = ({ filterData }: { filterData: string[] }) => {
   return (
     <View style={styles.container}>
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
+        data={filterData}
+        keyExtractor={(index) => index.toString()}
         renderItem={({ item }) => (
-          <Pressable style={styles.itemContainer}>
-            <Text style={styles.item}>{item.name}</Text>
+          <Pressable
+            style={styles.itemContainer}
+            onPress={() => console.log("item", item)}
+          >
+            <Text style={styles.item}>{item}</Text>
           </Pressable>
         )}
       />

@@ -76,6 +76,7 @@ const SignUp = () => {
         style={{ flex: 1 }}
       >
         <ScrollView
+          showsVerticalScrollIndicator={false}
           style={{ flex: 1 }}
           contentContainerStyle={{ paddingBottom: verticalScale(20) }}
         >

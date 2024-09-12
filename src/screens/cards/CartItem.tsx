@@ -1,31 +1,22 @@
-import { FlatList, Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { colors } from "@/constants/Token";
-import { scale, verticalScale } from "react-native-size-matters";
+import { colors, fontSize } from "@/constants/Token";
+import { TCard } from "@/src/utils/type";
+import { Image, StyleSheet, Text, View } from "react-native";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
-const CardItem = () => {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+interface Props {
+  item: TCard;
+}
 
-  const cardRenderItem = ({ item }: any) => (
-    <View style={styles.itemContainer}>
-      <Image
-        source={require("@/assets/images/error.png")}
-        style={styles.image}
-      />
-    </View>
-  );
-
+const CardItem = ({ item }: Props) => {
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={data}
-        numColumns={2}
-        contentContainerStyle={{ paddingBottom: verticalScale(80) }}
-        // keyextractor={(item) => item.id.toString()}
-        keyExtractor={(item) => item.toString()}
-        showsVerticalScrollIndicator={false}
-        renderItem={cardRenderItem}
-      />
+    <View style={styles.card}>
+      <Image source={{ uri: item.images.small }} style={styles.cardImage} />
+      <Text style={styles.cardName}>{item.name}</Text>
+
+      {item.types && (
+        <Text style={styles.cardInfo}>Type: {item.types.join(", ")}</Text>
+      )}
+      <Text style={styles.cardInfo}>Rarity: {item.rarity}</Text>
     </View>
   );
 };
@@ -46,9 +37,39 @@ const styles = StyleSheet.create({
     marginHorizontal: scale(6),
     marginBottom: verticalScale(15),
   },
-  image: {
-    width: scale(130),
-    height: verticalScale(120),
-    // backgroundColor: colors.background,
+  row: {
+    justifyContent: "space-between",
+  },
+  card: {
+    backgroundColor: colors.background,
+    borderRadius: moderateScale(8),
+    marginBottom: verticalScale(12),
+    paddingVertical: verticalScale(10),
+    width: "48%",
+    shadowColor: colors.text,
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    elevation: 2,
+    borderWidth: 1,
+    borderColor: "#DDDDDD",
+  },
+  cardImage: {
+    width: "85%",
+    height: verticalScale(150),
+    marginBottom: verticalScale(7),
+    alignSelf: "center",
+  },
+  cardName: {
+    fontSize: fontSize.sm,
+    textAlign: "center",
+    marginBottom: verticalScale(7),
+    fontFamily: "InterSemiBold",
+  },
+  cardInfo: {
+    fontSize: moderateScale(11),
+    color: "#555555",
+    marginBottom: verticalScale(4),
+    textAlign: "center",
+    fontFamily: "InterMedium",
   },
 });

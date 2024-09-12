@@ -1,11 +1,22 @@
 import { colors, fontSize } from "@/constants/Token";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-const SearchAndFilter = () => {
+const SearchAndFilter = ({
+  setShowFilter,
+  showFilter,
+}: {
+  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  showFilter: boolean;
+}) => {
   const [searchText, setSearchText] = useState<string>("");
+
+  const toggleShowFilter = () => {
+    setShowFilter(!showFilter);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.searchContainer}>
@@ -22,7 +33,7 @@ const SearchAndFilter = () => {
 
       <Pressable style={styles.filterContainer}>
         <Ionicons
-          onPress={() => console.log("hello")}
+          onPress={toggleShowFilter}
           name="filter"
           size={moderateScale(22)}
           color={colors.background}
