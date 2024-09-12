@@ -3,7 +3,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { TUser } from "../utils/type";
+import { TUser } from "../utils/cardType";
 
 interface Props {
   buttonText: string;

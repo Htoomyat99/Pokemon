@@ -1,9 +1,10 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import LoadingView from "@/src/components/LoadingView";
-import CartItem from "@/src/screens/cards/CartItem";
+import CardListItem from "@/src/screens/cards/CartListItem";
 import FilterList from "@/src/screens/cards/FilterList";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
-import { TCard } from "@/src/utils/type";
+import { TCard } from "@/src/utils/cardType";
+import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -107,7 +108,9 @@ const Cards = () => {
             contentContainerStyle={{ paddingBottom: verticalScale(80) }}
             keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => <CartItem item={item} />}
+            renderItem={({ item }) => (
+              <CardListItem setLoading={setLoading} item={item} />
+            )}
             columnWrapperStyle={{ justifyContent: "space-between" }}
           />
         </View>
@@ -126,8 +129,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: colors.text,
     paddingHorizontal: screenPadding.horizontal,
   },
   headerText: {

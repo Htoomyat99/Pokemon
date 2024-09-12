@@ -1,27 +1,39 @@
 import { colors, fontSize } from "@/constants/Token";
-import { TCard } from "@/src/utils/type";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { TCard } from "@/src/utils/cardType";
+import { router } from "expo-router";
+import { Image, Pressable, StyleSheet, Text } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 interface Props {
   item: TCard;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CardItem = ({ item }: Props) => {
-  return (
-    <View style={styles.card}>
-      <Image source={{ uri: item.images.small }} style={styles.cardImage} />
-      <Text style={styles.cardName}>{item.name}</Text>
+const CardListItem = ({ item, setLoading }: Props) => {
+  const goCardDetail = () => {
+    router.push({
+      pathname: "/detail",
+      params: { id: item.id },
+    });
+  };
 
+  return (
+    <Pressable onPress={goCardDetail} style={styles.card}>
+      <Image
+        resizeMode="contain"
+        source={{ uri: item.images.small }}
+        style={styles.cardImage}
+      />
+      <Text style={styles.cardName}>{item.name}</Text>
       {item.types && (
         <Text style={styles.cardInfo}>Type: {item.types.join(", ")}</Text>
       )}
       <Text style={styles.cardInfo}>Rarity: {item.rarity}</Text>
-    </View>
+    </Pressable>
   );
 };
 
-export default CardItem;
+export default CardListItem;
 
 const styles = StyleSheet.create({
   container: {
@@ -54,7 +66,7 @@ const styles = StyleSheet.create({
     borderColor: "#DDDDDD",
   },
   cardImage: {
-    width: "85%",
+    width: "100%",
     height: verticalScale(150),
     marginBottom: verticalScale(7),
     alignSelf: "center",

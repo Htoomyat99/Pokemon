@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { TAuthError } from "../utils/type";
+import { TAuthError } from "../utils/cardType";
 
 interface Props {
   hideModal: () => void;

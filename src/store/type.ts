@@ -1,4 +1,4 @@
-import { TUser } from "../utils/type";
+import { TUser } from "../utils/cardType";
 
 export interface SetType {
   (nextStateOrUpdater: (state: StoreState) => void): void;

@@ -3,7 +3,7 @@ import AuthForm from "@/src/components/AuthForm";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
 import { useSession } from "@/src/providers/SessionPrvoider";
 import { useStore } from "@/src/store/store";
-import { TAuthError, TUser } from "@/src/utils/type";
+import { TAuthError, TUser } from "@/src/utils/cardType";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {

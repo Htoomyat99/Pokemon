@@ -33,16 +33,6 @@ export interface TCard {
   weaknesses: TWeakness[];
 }
 
-interface TWeakness {
-  type: string;
-  value: string;
-}
-
-interface Tcgplayer {
-  updatedAt: string;
-  url: string;
-}
-
 interface TSet {
   id: string;
   images: TImages2;
@@ -59,10 +49,6 @@ interface TSet {
 interface TImages2 {
   logo: string;
   symbol: string;
-}
-
-interface TLegalities {
-  unlimited: string;
 }
 
 interface TImages {
@@ -100,4 +86,19 @@ interface TAttack {
   damage: string;
   name: string;
   text: string;
+}
+
+interface Tcgplayer {
+  url: string;
+  updatedAt: string;
+}
+
+interface TLegalities {
+  unlimited: string;
+  expanded?: string;
+}
+
+interface TWeakness {
+  type: string;
+  value: string;
 }

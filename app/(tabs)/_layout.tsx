@@ -5,6 +5,7 @@ import { BlurView } from "expo-blur";
 import { Redirect, Tabs } from "expo-router";
 import { ActivityIndicator, Platform, StyleSheet } from "react-native";
 import { moderateScale, verticalScale } from "react-native-size-matters";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const TabLayout = () => {
   const { session, isLoading } = useSession();
@@ -55,7 +56,11 @@ const TabLayout = () => {
         options={{
           title: "Cards",
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="heart" size={20} color={color} />
+            <MaterialIcons
+              name="catching-pokemon"
+              size={moderateScale(22)}
+              color={color}
+            />
           ),
         }}
       />
@@ -64,11 +69,7 @@ const TabLayout = () => {
         options={{
           title: "Collections",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons
-              name="playlist-play"
-              size={26}
-              color={color}
-            />
+            <FontAwesome name="heart" size={20} color={color} />
           ),
         }}
       />
