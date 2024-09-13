@@ -67,10 +67,23 @@ export const useCardType = () => {
   });
 };
 
-// export const useSearchCard = (search: string) => {
-//   return useQuery({
-//     queryKey: ["cardSearch", { search }],
-//     queryFn: fetchSearchCards,
-//     enabled: !!search,
-//   });
-// };
+const fetchCardDetail = async (id: string) => {
+  const response = await fetch(`${apiUrl.cards}/${id}`, {
+    headers: {
+      "X-Api-Key": apiKey,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch card detail");
+  }
+
+  return response.json();
+};
+
+export const useCardDetail = (id: string) => {
+  return useQuery({
+    queryKey: ["cardDetail", id],
+    queryFn: () => fetchCardDetail(id),
+  });
+};

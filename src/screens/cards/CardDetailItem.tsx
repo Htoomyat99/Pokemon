@@ -3,6 +3,7 @@ import { TCardDetail } from "@/src/utils/cardDetailType";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import { useRouter } from "expo-router";
 import {
+  Alert,
   Image,
   Pressable,
   SafeAreaView,
@@ -14,26 +15,24 @@ import {
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useStore } from "@/src/store/store";
 
 const CardDetailItem = ({ card }: { card: TCardDetail }) => {
   const router = useRouter();
+  const isFavorite = useStore((state) => state.isFavorite(card.id));
 
   const backAction = () => {
     router.back();
   };
 
-  const toggleFavorite = () => {};
+  const toggleFavorite = () => {
+    useStore.getState().toggleCollection(card);
+    Alert.alert("Success", "Card added to favorites");
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          paddingHorizontal: screenPadding.horizontal,
-        }}
-      >
+      <View style={styles.headerContainer}>
         <Pressable style={styles.iconContainer} onPress={backAction}>
           <FontAwesome6
             name="arrow-left"
@@ -42,8 +41,14 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
           />
         </Pressable>
 
+        <Text style={styles.headerText}>Card Details</Text>
+
         <Pressable style={styles.iconContainer} onPress={toggleFavorite}>
-          <FontAwesome name="heart" size={moderateScale(22)} color="#CCCCCC" />
+          <FontAwesome
+            name="heart"
+            size={moderateScale(22)}
+            color={isFavorite ? colors.text : "#CCCCCC"}
+          />
         </Pressable>
       </View>
 
@@ -141,9 +146,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFE",
     paddingTop: verticalScale(5),
   },
+  headerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: screenPadding.horizontal,
+    paddingVertical: verticalScale(7),
+  },
   iconContainer: {
-    padding: moderateScale(5),
-    marginTop: verticalScale(10),
+    paddingTop: verticalScale(10),
+    paddingBottom: verticalScale(5),
+  },
+  headerText: {
+    fontFamily: "InterSemiBold",
+    fontSize: moderateScale(18),
+    color: colors.text,
   },
   cardImage: {
     width: "100%",

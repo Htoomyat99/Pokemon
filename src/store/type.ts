@@ -1,3 +1,4 @@
+import { TCardDetail } from "../utils/cardDetailType";
 import { TUser } from "../utils/cardType";
 
 export interface SetType {
@@ -8,4 +9,10 @@ export interface AuthStateType {
   setUser: (newUser: TUser) => void;
 }
 
-export type StoreState = AuthStateType;
+export interface CollectionStateType {
+  collection: TCardDetail[];
+  toggleCollection: (card: TCardDetail) => void;
+  isFavorite: (id: string) => boolean;
+}
+
+export type StoreState = AuthStateType & CollectionStateType;

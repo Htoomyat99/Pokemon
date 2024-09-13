@@ -10,10 +10,7 @@ interface Props {
 
 const CardListItem = ({ item }: Props) => {
   const goCardDetail = () => {
-    router.push({
-      pathname: "/detail",
-      params: { id: item.id },
-    });
+    router.push(`/cards/${item.id}`);
   };
 
   return (

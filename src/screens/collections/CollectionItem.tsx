@@ -1,15 +1,23 @@
 import { colors } from "@/constants/Token";
-import { TCard } from "@/src/utils/cardType";
+import { useStore } from "@/src/store/store";
+import { TCardDetail } from "@/src/utils/cardDetailType";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
-const CollectionItem = ({ item }: { item: TCard }) => {
+const CollectionItem = ({ item }: { item: TCardDetail }) => {
+  const router = useRouter();
   const handleCardPress = () => {
-    console.log(item);
+    router.push({
+      pathname: "/collections/detail",
+      params: { card: JSON.stringify(item) },
+    });
   };
 
-  const handleRemoveFavorite = () => {};
+  const handleRemoveFavorite = () => {
+    useStore.getState().toggleCollection(item);
+  };
 
   return (
     <Pressable onPress={handleCardPress} style={styles.cardContainer}>

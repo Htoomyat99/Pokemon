@@ -1,8 +1,7 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
+import EmptyList from "@/src/components/EmptyList";
 import CollectionItem from "@/src/screens/collections/CollectionItem";
-import { TCard } from "@/src/utils/cardType";
-import { useRouter } from "expo-router";
-import { useEffect, useState } from "react";
+import { useStore } from "@/src/store/store";
 import {
   FlatList,
   SafeAreaView,
@@ -14,51 +13,20 @@ import {
 import { verticalScale } from "react-native-size-matters";
 
 const FavoriteListScreen = () => {
-  const apiKey = "06fff1ae-79ec-4bde-b43b-a1af3dfcaa92";
-  const page = 1;
-  const pageSize = 10;
-  const url = `https://api.pokemontcg.io/v2/cards?page=${page}&pageSize=${pageSize}`;
-  const router = useRouter();
+  const collectionCards = useStore((state) => state.collection);
 
-  const [data, setData] = useState<TCard[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "X-Api-Key": apiKey,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        setData(data.data);
-        setLoading(false);
-      } else {
-        console.log("Error fetching data:", response.statusText);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setLoading(false);
-    }
-  };
+  if (collectionCards.length <= 0) {
+    return <EmptyList />;
+  }
 
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <View style={styles.container}>
         <Text style={styles.title}>My Collections</Text>
+
         <FlatList
           contentContainerStyle={{ paddingBottom: verticalScale(70) }}
-          data={data}
+          data={collectionCards}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => <CollectionItem item={item} />}
           keyExtractor={(item) => item.id}
