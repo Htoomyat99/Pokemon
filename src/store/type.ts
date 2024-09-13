@@ -10,7 +10,7 @@ export interface AuthStateType {
 }
 
 export interface CollectionStateType {
-  collection: TCardDetail[];
+  collections: TCardDetail[];
   toggleCollection: (card: TCardDetail) => void;
   isFavorite: (id: string) => boolean;
 }

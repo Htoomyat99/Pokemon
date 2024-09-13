@@ -13,7 +13,7 @@ import {
 import { verticalScale } from "react-native-size-matters";
 
 const FavoriteListScreen = () => {
-  const collectionCards = useStore((state) => state.collection);
+  const collectionCards = useStore((state) => state.collections);
 
   if (collectionCards.length <= 0) {
     return <EmptyList />;
