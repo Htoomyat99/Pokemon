@@ -33,7 +33,7 @@ const ErrorAlertModal = ({
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={hideModal}>
         <BlurView
           style={styles.blurContainer}
-          intensity={40}
+          intensity={20}
           tint="dark"
           experimentalBlurMethod="dimezisBlurView"
         >

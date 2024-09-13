@@ -1,18 +1,20 @@
 import { colors, fontSize } from "@/constants/Token";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 const SearchAndFilter = ({
   setShowFilter,
   showFilter,
+  searchText,
+  setSearchText,
 }: {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   showFilter: boolean;
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [searchText, setSearchText] = useState<string>("");
-
   const toggleShowFilter = () => {
     setShowFilter(!showFilter);
   };
@@ -27,7 +29,7 @@ const SearchAndFilter = ({
           onChangeText={setSearchText}
           style={styles.searchInput}
           cursorColor={colors.text}
-          placeholder="Search"
+          placeholder="Search Cards"
         />
       </View>
 

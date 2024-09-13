@@ -1,5 +1,7 @@
 import { colors, fontSize } from "@/constants/Token";
+import LoadingView from "@/src/components/LoadingView";
 import { useCardType } from "@/src/hooks/useQuery";
+import React from "react";
 import {
   Alert,
   FlatList,
@@ -10,11 +12,28 @@ import {
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
-const FilterList = () => {
-  const { data, isError, error, isLoading } = useCardType();
+interface Props {
+  cardType: string;
+  setCardType: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const FilterList = ({ cardType, setCardType }: Props) => {
+  const { data, isError, error, isLoading, isFetching } = useCardType();
+
+  const handleSelect = (item: string) => {
+    if (item === cardType) {
+      setCardType("");
+    } else {
+      setCardType(item);
+    }
+  };
 
   if (isError) {
     Alert.alert("Error", error?.message);
+  }
+
+  if (isLoading) {
+    return <LoadingView />;
   }
 
   return (
@@ -26,11 +45,19 @@ const FilterList = () => {
         keyExtractor={(index) => index.toString()}
         renderItem={({ item }) => (
           <Pressable
-            style={styles.itemContainer}
-            onPress={() => console.log("item", item)}
+            style={{
+              ...styles.itemContainer,
+              backgroundColor: cardType === item ? "#6E8194" : undefined,
+            }}
+            onPress={() => handleSelect(item)}
           >
-            <Text style={styles.item}>
-              {!isLoading ? (
+            <Text
+              style={{
+                ...styles.item,
+                color: cardType === item ? colors.background : colors.text,
+              }}
+            >
+              {isFetching ? (
                 <Text style={styles.loading}>Loading...</Text>
               ) : (
                 item
@@ -50,16 +77,16 @@ const styles = StyleSheet.create({
     marginTop: verticalScale(8),
   },
   itemContainer: {
-    backgroundColor: "#6E8194",
     paddingVertical: verticalScale(4),
     paddingHorizontal: scale(20),
     marginRight: scale(10),
     borderRadius: moderateScale(6),
+    borderWidth: 1,
+    borderColor: "#6E8194",
   },
   item: {
     fontFamily: "InterMedium",
-    fontSize: fontSize.sm,
-    color: colors.background,
+    fontSize: moderateScale(13),
   },
   loading: {
     fontFamily: "InterMedium",

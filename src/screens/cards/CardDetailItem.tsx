@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 const CardDetailItem = ({ card }: { card: TCardDetail }) => {
   const router = useRouter();
@@ -21,15 +22,30 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
     router.back();
   };
 
+  const toggleFavorite = () => {};
+
   return (
     <SafeAreaView style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
-      <Pressable style={styles.iconContainer} onPress={backAction}>
-        <FontAwesome6
-          name="arrow-left"
-          size={moderateScale(20)}
-          color="black"
-        />
-      </Pressable>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingHorizontal: screenPadding.horizontal,
+        }}
+      >
+        <Pressable style={styles.iconContainer} onPress={backAction}>
+          <FontAwesome6
+            name="arrow-left"
+            size={moderateScale(20)}
+            color="black"
+          />
+        </Pressable>
+
+        <Pressable style={styles.iconContainer} onPress={toggleFavorite}>
+          <FontAwesome name="heart" size={moderateScale(22)} color="#CCCCCC" />
+        </Pressable>
+      </View>
 
       <ScrollView style={styles.container}>
         {/* Card Image */}
@@ -95,14 +111,22 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         </Text>
 
         {/* Pricing Information */}
-        <Text style={styles.sectionTitle}>Prices</Text>
-        <Text style={styles.cardText}>
-          Market Price: ${card?.tcgplayer.prices.holofoil.low.toFixed(2)}
-        </Text>
-        <Text style={{ ...styles.cardText, marginBottom: verticalScale(15) }}>
-          Low: ${card?.tcgplayer.prices.holofoil.low.toFixed(2)}, High: $
-          {card?.tcgplayer.prices.holofoil.high.toFixed(2)}
-        </Text>
+        {card.tcgplayer.prices.holofoil && (
+          <View>
+            <Text style={styles.sectionTitle}>Prices</Text>
+
+            <Text style={styles.cardText}>
+              Market Price: ${card?.tcgplayer.prices.holofoil.low.toFixed(2)}
+            </Text>
+
+            <Text
+              style={{ ...styles.cardText, marginBottom: verticalScale(15) }}
+            >
+              Low: ${card?.tcgplayer.prices.holofoil.low.toFixed(2)}, High: $
+              {card?.tcgplayer.prices.holofoil.high.toFixed(2)}
+            </Text>
+          </View>
+        )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -118,9 +142,7 @@ const styles = StyleSheet.create({
     paddingTop: verticalScale(5),
   },
   iconContainer: {
-    alignSelf: "flex-start",
     padding: moderateScale(5),
-    marginLeft: screenPadding.horizontal,
     marginTop: verticalScale(10),
   },
   cardImage: {
