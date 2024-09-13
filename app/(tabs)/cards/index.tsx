@@ -1,10 +1,10 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
+import ErrorAlertModal from "@/src/components/ErrorAlertModal";
 import LoadingView from "@/src/components/LoadingView";
+import { useCard, useCardType } from "@/src/hooks/useQuery";
 import CardListItem from "@/src/screens/cards/CartListItem";
 import FilterList from "@/src/screens/cards/FilterList";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
-import { TCard } from "@/src/utils/cardType";
-import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -17,70 +17,29 @@ import {
 import { verticalScale } from "react-native-size-matters";
 
 const Cards = () => {
-  const apiKey = "06fff1ae-79ec-4bde-b43b-a1af3dfcaa92";
-  const page = 1;
-  const pageSize = 10;
-  const url = `https://api.pokemontcg.io/v2/cards?page=${page}&pageSize=${pageSize}`;
-  const filterUrl = "https://api.pokemontcg.io/v2/types";
-
-  const [data, setData] = useState<TCard[]>([]);
-  const [filterData, setFilterData] = useState<string[]>([]);
-  const [loading, setLoading] = useState(true);
-
+  const [errModal, setErrModal] = useState({ status: false, errMsg: "" });
   const [showFilter, setShowFilter] = useState(false);
 
+  const {
+    isError,
+    hasNextPage,
+    fetchNextPage,
+    data,
+    error,
+    status,
+    isFetchingNextPage,
+    refetch,
+  } = useCard();
+
+  const cardData = data?.pages.flatMap((page) => page.data) || [];
+
   useEffect(() => {
-    fetchData();
-    fetchFilterData();
-  }, []);
+    isError && setErrModal({ status: true, errMsg: error.message });
+  }, [isError]);
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(url, {
-        method: "GET",
-        headers: {
-          "X-Api-Key": apiKey,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        setData(data.data);
-        setLoading(false);
-      } else {
-        console.log("Error fetching data:", response.statusText);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setLoading(false);
-    }
-  };
-
-  const fetchFilterData = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(filterUrl, {
-        method: "GET",
-        headers: {
-          "X-Api-Key": apiKey,
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        setFilterData(data.data);
-        setLoading(false);
-      } else {
-        console.log("Error fetching data:", response.statusText);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setLoading(false);
+  const loadMore = () => {
+    if (hasNextPage) {
+      fetchNextPage();
     }
   };
 
@@ -98,22 +57,34 @@ const Cards = () => {
           setShowFilter={setShowFilter}
         />
 
-        {showFilter && <FilterList filterData={filterData} />}
+        {showFilter && <FilterList />}
 
         <View style={styles.flatListContainer}>
           <FlatList
-            ListHeaderComponent={loading ? <LoadingView /> : null}
-            data={data}
+            // refreshing={false}
+            // onRefresh={() => refetch()}
+            data={cardData}
             numColumns={2}
             contentContainerStyle={{ paddingBottom: verticalScale(80) }}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item, index) => `${item.id}-${index}`}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <CardListItem setLoading={setLoading} item={item} />
-            )}
+            renderItem={({ item }) => <CardListItem item={item} />}
             columnWrapperStyle={{ justifyContent: "space-between" }}
+            onEndReached={loadMore}
+            onEndReachedThreshold={0.5}
+            ListHeaderComponent={status === "pending" ? <LoadingView /> : null}
+            ListFooterComponent={isFetchingNextPage ? <LoadingView /> : null}
           />
         </View>
+
+        <ErrorAlertModal
+          hideModal={() => {
+            setErrModal({ status: false, errMsg: "" });
+            refetch();
+          }}
+          btnText="Retry"
+          errModal={errModal}
+        />
       </View>
     </SafeAreaView>
   );

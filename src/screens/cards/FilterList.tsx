@@ -1,22 +1,41 @@
 import { colors, fontSize } from "@/constants/Token";
-import { useState } from "react";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import { useCardType } from "@/src/hooks/useQuery";
+import {
+  Alert,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
-const FilterList = ({ filterData }: { filterData: string[] }) => {
+const FilterList = () => {
+  const { data, isError, error, isLoading } = useCardType();
+
+  if (isError) {
+    Alert.alert("Error", error?.message);
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
         showsHorizontalScrollIndicator={false}
         horizontal
-        data={filterData}
+        data={data?.data || []}
         keyExtractor={(index) => index.toString()}
         renderItem={({ item }) => (
           <Pressable
             style={styles.itemContainer}
             onPress={() => console.log("item", item)}
           >
-            <Text style={styles.item}>{item}</Text>
+            <Text style={styles.item}>
+              {!isLoading ? (
+                <Text style={styles.loading}>Loading...</Text>
+              ) : (
+                item
+              )}
+            </Text>
           </Pressable>
         )}
       />
@@ -40,6 +59,11 @@ const styles = StyleSheet.create({
   item: {
     fontFamily: "InterMedium",
     fontSize: fontSize.sm,
+    color: colors.background,
+  },
+  loading: {
+    fontFamily: "InterMedium",
+    fontSize: fontSize.xs,
     color: colors.background,
   },
 });

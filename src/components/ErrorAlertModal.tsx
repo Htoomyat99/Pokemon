@@ -15,9 +15,14 @@ import { TAuthError } from "../utils/cardType";
 interface Props {
   hideModal: () => void;
   errModal: TAuthError;
+  btnText?: string;
 }
 
-const ErrorAlertModal = ({ hideModal, errModal }: Props) => {
+const ErrorAlertModal = ({
+  hideModal,
+  errModal,
+  btnText = "Got it",
+}: Props) => {
   return (
     <Modal
       visible={errModal.status}
@@ -48,7 +53,7 @@ const ErrorAlertModal = ({ hideModal, errModal }: Props) => {
             <Text style={styles.errText}>{errModal.errMsg}</Text>
 
             <Pressable style={styles.btnContainer} onPress={hideModal}>
-              <Text style={styles.btnText}>Got it</Text>
+              <Text style={styles.btnText}>{btnText}</Text>
             </Pressable>
           </View>
         </BlurView>

@@ -6,10 +6,9 @@ import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 interface Props {
   item: TCard;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const CardListItem = ({ item, setLoading }: Props) => {
+const CardListItem = ({ item }: Props) => {
   const goCardDetail = () => {
     router.push({
       pathname: "/detail",

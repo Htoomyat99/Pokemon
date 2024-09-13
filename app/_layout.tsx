@@ -10,7 +10,15 @@ import "react-native-reanimated";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const queryClient = new QueryClient();
+  const client = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 300000, // 5 minutes
+        retry: 2,
+        refetchOnWindowFocus: true,
+      },
+    },
+  });
 
   const [loaded] = useFonts({
     InterRegular: require("@/assets/fonts/Inter-Regular.ttf"),
@@ -30,7 +38,7 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={client}>
       <SessionProvider>
         <Slot />
       </SessionProvider>

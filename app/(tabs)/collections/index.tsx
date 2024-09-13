@@ -55,7 +55,7 @@ const FavoriteListScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <View style={styles.container}>
-        <Text style={styles.title}>My Favorite Cards</Text>
+        <Text style={styles.title}>My Collections</Text>
         <FlatList
           contentContainerStyle={{ paddingBottom: verticalScale(70) }}
           data={data}
