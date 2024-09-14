@@ -1,12 +1,16 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
-import EmptyList from "@/src/components/EmptyList";
+import ConfirmLogout from "@/src/components/ConfirmLogout";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
 import LoadingView from "@/src/components/LoadingView";
+import NotFound from "@/src/components/NotFound";
 import { useDebounce } from "@/src/hooks/useDebounce";
 import { useCardFilter } from "@/src/hooks/useQuery";
+import { useSession } from "@/src/providers/SessionPrvoider";
 import CardListItem from "@/src/screens/cards/CartListItem";
 import FilterList from "@/src/screens/cards/FilterList";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
+import { stringWithoutSpaces } from "@/src/utils/stringWithoutSpaces";
+import AntDesign from "@expo/vector-icons/AntDesign";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -16,7 +20,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { verticalScale } from "react-native-size-matters";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 const Cards = () => {
   const [errModal, setErrModal] = useState({ status: false, errMsg: "" });
@@ -25,7 +29,11 @@ const Cards = () => {
   const [searchText, setSearchText] = useState<string>("");
   const [cardType, setCardType] = useState("");
 
-  const debounceText = useDebounce(searchText, 500);
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const { signOut } = useSession();
+
+  const debounceText = useDebounce(stringWithoutSpaces(searchText), 500);
 
   const {
     data: filterData,
@@ -50,10 +58,24 @@ const Cards = () => {
     }
   };
 
+  const handleLogout = () => {
+    setModalVisible(true);
+  };
+
   return (
     <SafeAreaView style={styles.safeAreaView}>
       <View style={styles.container}>
-        <Text style={styles.headerText}>Pokémon</Text>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerText}>Pokémon</Text>
+
+          <AntDesign
+            onPress={handleLogout}
+            name="logout"
+            size={moderateScale(22)}
+            color={colors.text}
+            style={styles.iconContainer}
+          />
+        </View>
 
         <Text style={styles.descText}>
           Search for pokemon by name or using its national number
@@ -74,6 +96,7 @@ const Cards = () => {
           <FlatList
             // refreshing={false}
             // onRefresh={() => refetch()}
+            style={{ marginTop: verticalScale(25) }}
             data={filterCardData}
             numColumns={2}
             contentContainerStyle={{ paddingBottom: verticalScale(80) }}
@@ -85,7 +108,7 @@ const Cards = () => {
             onEndReachedThreshold={0.5}
             ListHeaderComponent={isLoading ? <LoadingView /> : null}
             ListFooterComponent={isFetchingNextPage ? <LoadingView /> : null}
-            ListEmptyComponent={() => (isLoading ? null : <EmptyList />)}
+            ListEmptyComponent={() => (isLoading ? null : <NotFound />)}
           />
         </View>
 
@@ -96,6 +119,12 @@ const Cards = () => {
           }}
           btnText="Retry"
           errModal={errModal}
+        />
+
+        <ConfirmLogout
+          visible={modalVisible}
+          hideModal={() => setModalVisible(false)}
+          confirmAction={signOut}
         />
       </View>
     </SafeAreaView>
@@ -114,11 +143,20 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: screenPadding.horizontal,
   },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
   headerText: {
     fontFamily: "InterSemiBold",
     fontSize: fontSize.lg,
     color: colors.text,
     marginTop: verticalScale(15),
+  },
+  iconContainer: {
+    paddingVertical: verticalScale(5),
+    paddingHorizontal: scale(7),
   },
   descText: {
     fontFamily: "InterMedium",
@@ -128,6 +166,6 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     flex: 1,
-    marginTop: verticalScale(25),
+    // marginTop: verticalScale(25),
   },
 });

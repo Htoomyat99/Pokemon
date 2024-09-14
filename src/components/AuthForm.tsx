@@ -1,6 +1,6 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { TUser } from "../utils/cardType";
@@ -38,6 +38,7 @@ const AuthForm = ({ buttonText, btnAction }: Props) => {
           cursorColor={colors.text}
           onFocus={() => setBorderColor(colors.text)}
           onBlur={() => setBorderColor(colors.background)}
+          autoCapitalize="none"
         />
       </View>
 

@@ -1,39 +1,39 @@
 import { colors, fontSize } from "@/constants/Token";
 import LottieView from "lottie-react-native";
 import { StyleSheet, Text, View } from "react-native";
-import { scale } from "react-native-size-matters";
+import { scale, verticalScale } from "react-native-size-matters";
 
-const LoadingView = () => {
+const NotFound = () => {
   return (
     <View style={styles.container}>
       <LottieView
-        source={require("@/assets/animations/pokeLoading.json")}
+        source={require("@/assets/animations/noData.json")}
         style={styles.lottie}
         autoPlay
         loop
       />
 
-      <Text style={styles.text}>Loading ...</Text>
+      <Text style={styles.text}>No Data Found</Text>
     </View>
   );
 };
 
-export default LoadingView;
+export default NotFound;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "center",
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
   },
   lottie: {
-    width: scale(100),
-    height: scale(100),
+    width: scale(250),
+    height: scale(200),
+    marginTop: verticalScale(20),
   },
   text: {
-    textAlign: "center",
-    color: colors.textMuted,
-    marginLeft: scale(15),
-    fontFamily: "InterSemiBold",
     fontSize: fontSize.sm,
+    fontFamily: "InterSemiBold",
+    color: colors.textMuted,
   },
 });
