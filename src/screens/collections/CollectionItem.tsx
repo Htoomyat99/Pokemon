@@ -1,6 +1,7 @@
 import { colors } from "@/constants/Token";
 import { useStore } from "@/src/store/store";
 import { TCardDetail } from "@/src/utils/cardDetailType";
+import { toastService } from "@/src/utils/toastService";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
@@ -8,6 +9,9 @@ import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 const CollectionItem = ({ item }: { item: TCardDetail }) => {
   const router = useRouter();
+
+  const isFavorite = useStore((state) => state.isFavorite(item.id));
+  const { addFavoriteToast, removeFavoriteToast } = toastService();
   const handleCardPress = () => {
     router.push({
       pathname: "/collections/detail",
@@ -17,6 +21,12 @@ const CollectionItem = ({ item }: { item: TCardDetail }) => {
 
   const handleRemoveFavorite = () => {
     useStore.getState().toggleCollection(item);
+
+    if (isFavorite) {
+      removeFavoriteToast();
+    } else {
+      addFavoriteToast();
+    }
   };
 
   return (
