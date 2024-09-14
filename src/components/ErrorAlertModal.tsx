@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { TAuthError } from "../utils/cardType";
+import { TAuthError } from "@/src/type/StausAuth";
 
 interface Props {
   hideModal: () => void;

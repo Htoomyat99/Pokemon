@@ -1,5 +1,5 @@
-import { TCardDetail } from "../utils/cardDetailType";
-import { TUser } from "../utils/cardType";
+import { TCardDetail } from "../type/cardDetailType";
+import { TUser } from "../type/StausAuth";
 
 export interface SetType {
   (nextStateOrUpdater: (state: StoreState) => void): void;

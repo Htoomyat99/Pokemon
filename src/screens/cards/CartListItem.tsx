@@ -1,5 +1,5 @@
 import { colors, fontSize } from "@/constants/Token";
-import { TCard } from "@/src/utils/cardType";
+import { TCard } from "@/src/type/cardType";
 import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";

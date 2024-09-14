@@ -1,5 +1,5 @@
 import { MMKV } from "react-native-mmkv";
-import { TCardDetail } from "../utils/cardDetailType";
+import { TCardDetail } from "../type/cardDetailType";
 import { AuthStateType, CollectionStateType, SetType } from "./type";
 
 export const storage = new MMKV();

@@ -1,6 +1,6 @@
 import { colors } from "@/constants/Token";
 import { useStore } from "@/src/store/store";
-import { TCardDetail } from "@/src/utils/cardDetailType";
+import { TCardDetail } from "@/src/type/cardDetailType";
 import { toastService } from "@/src/utils/toastService";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useRouter } from "expo-router";

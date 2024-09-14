@@ -1,9 +1,9 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
+import { TUser } from "@/src/type/StausAuth";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { TUser } from "../utils/cardType";
 
 interface Props {
   buttonText: string;
