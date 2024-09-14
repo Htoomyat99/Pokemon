@@ -117,6 +117,7 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         <Image
           source={{ uri: card.set.images.symbol }}
           style={styles.setSymbol}
+          resizeMode="contain"
         />
 
         {/* Weaknesses */}
