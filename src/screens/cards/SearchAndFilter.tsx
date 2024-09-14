@@ -1,22 +1,39 @@
 import { colors, fontSize } from "@/constants/Token";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React from "react";
+import React, { useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 const SearchAndFilter = ({
   setShowFilter,
   showFilter,
-  searchText,
-  setSearchText,
+  goAction,
 }: {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   showFilter: boolean;
-  searchText: string;
-  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  goAction: (text: string) => void;
 }) => {
+  const [example, setExample] = useState("");
+  const [typingTimeout, setTypingTimeout] = useState<ReturnType<
+    typeof setTimeout
+  > | null>(null);
+
   const toggleShowFilter = () => {
     setShowFilter(!showFilter);
+  };
+
+  const handleTextChange = (newText: string) => {
+    setExample(newText);
+
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    const timeout = setTimeout(() => {
+      goAction(newText);
+    }, 800);
+
+    setTypingTimeout(timeout);
   };
 
   return (
@@ -25,8 +42,8 @@ const SearchAndFilter = ({
         <Feather name="search" size={moderateScale(23)} color={"#6E8194"} />
 
         <TextInput
-          value={searchText}
-          onChangeText={setSearchText}
+          value={example}
+          onChangeText={handleTextChange}
           style={styles.searchInput}
           cursorColor={colors.text}
           placeholder="Search Cards"

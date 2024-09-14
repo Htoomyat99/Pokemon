@@ -1,5 +1,6 @@
 import { colors, fontSize } from "@/constants/Token";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { BlurView } from "expo-blur";
 import {
   Modal,
   Pressable,
@@ -25,7 +26,12 @@ const ConfirmLogout = ({ hideModal, visible, confirmAction }: Props) => {
       animationType="fade"
     >
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={hideModal}>
-        <View style={styles.blurContainer}>
+        <BlurView
+          style={styles.blurContainer}
+          tint="dark"
+          intensity={40}
+          experimentalBlurMethod="dimezisBlurView"
+        >
           <View style={styles.container}>
             <View style={styles.errorContainer}>
               <MaterialIcons
@@ -58,7 +64,7 @@ const ConfirmLogout = ({ hideModal, visible, confirmAction }: Props) => {
               </Pressable>
             </View>
           </View>
-        </View>
+        </BlurView>
       </TouchableWithoutFeedback>
     </Modal>
   );
@@ -68,6 +74,11 @@ export default ConfirmLogout;
 
 const styles = StyleSheet.create({
   blurContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",

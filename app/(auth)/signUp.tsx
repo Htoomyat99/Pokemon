@@ -4,7 +4,6 @@ import ErrorAlertModal from "@/src/components/ErrorAlertModal";
 import { useSession } from "@/src/providers/SessionPrvoider";
 import { useStore } from "@/src/store/store";
 import { TAuthError, TUser } from "@/src/type/StausAuth";
-import { BlurView } from "@react-native-community/blur";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
@@ -89,18 +88,10 @@ const SignUp = () => {
             </Text>
           </Text>
 
-          {errModal.status && (
-            <BlurView
-              blurAmount={10}
-              blurType="light"
-              style={StyleSheet.absoluteFill}
-            >
-              <ErrorAlertModal
-                errModal={{ status: errModal.status, errMsg: errModal.errMsg }}
-                hideModal={hideModal}
-              />
-            </BlurView>
-          )}
+          <ErrorAlertModal
+            errModal={{ status: errModal.status, errMsg: errModal.errMsg }}
+            hideModal={hideModal}
+          />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

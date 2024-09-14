@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 import { TAuthError } from "@/src/type/StausAuth";
+import { BlurView } from "expo-blur";
 
 interface Props {
   hideModal: () => void;
@@ -30,7 +31,12 @@ const ErrorAlertModal = ({
       animationType="fade"
     >
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={hideModal}>
-        <View style={styles.mainContainer}>
+        <BlurView
+          style={styles.mainContainer}
+          tint="dark"
+          intensity={40}
+          experimentalBlurMethod="dimezisBlurView"
+        >
           <View style={styles.container}>
             <View style={styles.errorContainer}>
               <MaterialIcons
@@ -50,7 +56,7 @@ const ErrorAlertModal = ({
               <Text style={styles.btnText}>{btnText}</Text>
             </Pressable>
           </View>
-        </View>
+        </BlurView>
       </TouchableWithoutFeedback>
     </Modal>
   );

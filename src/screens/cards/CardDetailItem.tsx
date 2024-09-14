@@ -37,6 +37,8 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
     }
   };
 
+  const cardPrice = card?.tcgplayer.prices.holofoil;
+
   return (
     <SafeAreaView style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
       <View style={styles.headerContainer}>
@@ -59,7 +61,10 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         </Pressable>
       </View>
 
-      <ScrollView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={{ paddingVertical: verticalScale(15) }}
+        style={styles.container}
+      >
         {/* Card Image */}
         <Image
           resizeMode="contain"
@@ -123,20 +128,17 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         </Text>
 
         {/* Pricing Information */}
-        {card.tcgplayer.prices && (
+        {card.tcgplayer.prices.holofoil && (
           <View>
             <Text style={styles.sectionTitle}>Prices</Text>
 
             <Text style={styles.cardText}>
-              Market Price: $
-              {card?.tcgplayer.prices.holofoil.low.toFixed(2) ?? ""}
+              Market Price: ${cardPrice.low ? cardPrice.low.toFixed(2) : ""}
             </Text>
 
-            <Text
-              style={{ ...styles.cardText, marginBottom: verticalScale(15) }}
-            >
-              Low: ${card?.tcgplayer.prices.holofoil.low.toFixed(2) ?? ""},
-              High: ${card?.tcgplayer.prices.holofoil.high.toFixed(2) ?? ""}
+            <Text style={styles.cardText}>
+              Low: ${cardPrice?.low ? cardPrice.low.toFixed(2) : ""}, High: $
+              {cardPrice.high ? cardPrice.high.toFixed(2) : ""}
             </Text>
           </View>
         )}
@@ -151,8 +153,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: screenPadding.horizontal,
-    backgroundColor: "#FFFFFE",
-    paddingTop: verticalScale(5),
+    backgroundColor: colors.background,
   },
   headerContainer: {
     flexDirection: "row",
