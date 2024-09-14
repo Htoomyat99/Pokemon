@@ -3,7 +3,7 @@ import AuthForm from "@/src/components/AuthForm";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
 import { useSession } from "@/src/providers/SessionPrvoider";
 import { useStore } from "@/src/store/store";
-import { TAuthError, TUser } from "@/src/utils/cardType";
+import { TAuthError, TUser } from "@/src/type/StausAuth";
 import { BlurView } from "@react-native-community/blur";
 import { useRouter } from "expo-router";
 import { useState } from "react";

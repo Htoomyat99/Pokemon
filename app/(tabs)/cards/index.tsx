@@ -15,6 +15,7 @@ import { BlurView } from "@react-native-community/blur";
 import { useEffect, useState } from "react";
 import {
   FlatList,
+  RefreshControl,
   SafeAreaView,
   StatusBar,
   StyleSheet,
@@ -45,6 +46,7 @@ const Cards = () => {
     fetchNextPage,
     isFetchingNextPage,
     refetch,
+    isFetching,
   } = useCardFilter(debounceText, cardType);
 
   const filterCardData = filterData?.pages.flatMap((page) => page.data) || [];
@@ -62,6 +64,13 @@ const Cards = () => {
   const handleLogout = () => {
     setModalVisible(true);
   };
+
+  const refreshControl = (
+    <RefreshControl
+      refreshing={isFetching && !isFetchingNextPage && !isLoading}
+      onRefresh={refetch}
+    />
+  );
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -95,8 +104,7 @@ const Cards = () => {
 
         <View style={styles.flatListContainer}>
           <FlatList
-            // refreshing={false}
-            // onRefresh={() => refetch()}
+            refreshControl={refreshControl}
             style={{ marginTop: verticalScale(25) }}
             data={filterCardData}
             numColumns={2}

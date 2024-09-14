@@ -128,14 +128,15 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
             <Text style={styles.sectionTitle}>Prices</Text>
 
             <Text style={styles.cardText}>
-              Market Price: ${card?.tcgplayer.prices.holofoil.low.toFixed(2)}
+              Market Price: $
+              {card?.tcgplayer.prices.holofoil.low.toFixed(2) ?? ""}
             </Text>
 
             <Text
               style={{ ...styles.cardText, marginBottom: verticalScale(15) }}
             >
-              Low: ${card?.tcgplayer.prices.holofoil.low.toFixed(2)}, High: $
-              {card?.tcgplayer.prices.holofoil.high.toFixed(2)}
+              Low: ${card?.tcgplayer.prices.holofoil.low.toFixed(2) ?? ""},
+              High: ${card?.tcgplayer.prices.holofoil.high.toFixed(2) ?? ""}
             </Text>
           </View>
         )}

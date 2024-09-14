@@ -37,6 +37,7 @@ const fetchfilterCards = async ({ pageParam = 1, queryKey }: Props) => {
 };
 
 export const useCardFilter = (search: string, type: string) => {
+  console.log("render");
   return useInfiniteQuery({
     queryKey: ["filterCards", search, type],
     queryFn: fetchfilterCards,
