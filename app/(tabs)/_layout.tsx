@@ -37,18 +37,18 @@ const TabLayout = () => {
             Platform.OS === "android" ? moderateScale(10) : moderateScale(25),
           height: Platform.OS === "ios" ? verticalScale(65) : verticalScale(55),
         },
-        tabBarBackground: () => (
-          <BlurView
-            experimentalBlurMethod="dimezisBlurView"
-            intensity={80}
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              overflow: "hidden",
-              borderTopLeftRadius: moderateScale(20),
-              borderTopRightRadius: moderateScale(20),
-            }}
-          />
-        ),
+        // tabBarBackground: () => (
+        //   <BlurView
+        //     experimentalBlurMethod="dimezisBlurView"
+        //     intensity={80}
+        //     style={{
+        //       ...StyleSheet.absoluteFillObject,
+        //       overflow: "hidden",
+        //       borderTopLeftRadius: moderateScale(20),
+        //       borderTopRightRadius: moderateScale(20),
+        //     }}
+        //   />
+        // ),
       }}
     >
       <Tabs.Screen
