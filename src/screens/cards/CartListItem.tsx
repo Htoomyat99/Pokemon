@@ -1,8 +1,9 @@
 import { colors, fontSize } from "@/constants/Token";
 import { TCard } from "@/src/type/cardType";
+import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, Text } from "react-native";
-import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+import { moderateScale, verticalScale } from "react-native-size-matters";
 
 interface Props {
   item: TCard;
@@ -14,56 +15,50 @@ const CardListItem = ({ item }: Props) => {
   };
 
   return (
-    <Pressable onPress={goCardDetail} style={styles.card}>
-      <Image
-        resizeMode="contain"
-        source={{ uri: item.images.small }}
-        style={styles.cardImage}
-      />
-      <Text style={styles.cardName}>{item.name}</Text>
-      {item.types && (
-        <Text style={styles.cardInfo}>Type: {item.types.join(", ")}</Text>
-      )}
-      <Text style={styles.cardInfo}>Rarity: {item.rarity}</Text>
-    </Pressable>
+    <LinearGradient
+      colors={["#FFCC33", "#FFB347", "#FF7F00"]}
+      style={styles.linear}
+    >
+      <Pressable onPress={goCardDetail} style={styles.card}>
+        <Image
+          resizeMode="contain"
+          source={{ uri: item.images.small }}
+          style={styles.cardImage}
+        />
+        <Text style={styles.cardName}>{item.name}</Text>
+        {item.types && (
+          <Text style={styles.cardInfo}>Type: {item.types.join(", ")}</Text>
+        )}
+        <Text style={styles.cardInfo}>Rarity: {item.rarity}</Text>
+      </Pressable>
+    </LinearGradient>
   );
 };
 
 export default CardListItem;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: colors.text,
-    marginTop: verticalScale(25),
+  linear: {
+    borderRadius: moderateScale(8),
+    marginBottom: verticalScale(13),
+    paddingVertical: verticalScale(1.5),
+    width: "48%",
     alignItems: "center",
-  },
-  itemContainer: {
-    backgroundColor: "#f0f1f0",
-    paddingHorizontal: scale(6),
-    marginHorizontal: scale(6),
-    marginBottom: verticalScale(15),
-  },
-  row: {
-    justifyContent: "space-between",
+    justifyContent: "center",
   },
   card: {
     backgroundColor: colors.background,
-    borderRadius: moderateScale(8),
-    marginBottom: verticalScale(12),
+    borderRadius: moderateScale(7),
     paddingVertical: verticalScale(10),
-    width: "48%",
+    width: "98%",
     shadowColor: colors.text,
     shadowOpacity: 0.1,
     shadowRadius: 8,
     elevation: 2,
-    borderWidth: 1,
-    borderColor: "#DDDDDD",
   },
   cardImage: {
     width: "100%",
-    height: verticalScale(150),
+    height: verticalScale(120),
     marginBottom: verticalScale(7),
     alignSelf: "center",
   },
@@ -72,6 +67,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: verticalScale(7),
     fontFamily: "InterSemiBold",
+    textAlignVertical: "center",
+    minHeight: verticalScale(36),
   },
   cardInfo: {
     fontSize: moderateScale(11),

@@ -81,6 +81,8 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(6),
     backgroundColor: "#E0E5E5",
     borderRadius: moderateScale(10),
+    borderWidth: 1,
+    borderColor: "#BBBBBB",
   },
   searchInput: {
     color: colors.text,

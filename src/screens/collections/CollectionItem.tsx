@@ -3,6 +3,7 @@ import { useStore } from "@/src/store/store";
 import { TCardDetail } from "@/src/type/cardDetailType";
 import { toastService } from "@/src/utils/toastService";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
@@ -30,30 +31,37 @@ const CollectionItem = ({ item }: { item: TCardDetail }) => {
   };
 
   return (
-    <Pressable onPress={handleCardPress} style={styles.cardContainer}>
-      {/* Card Image */}
-      <Image source={{ uri: item.images.small }} style={styles.cardImage} />
+    <LinearGradient colors={["#FF6F61", "#FFB57A"]} style={styles.linear}>
+      <Pressable onPress={handleCardPress} style={styles.cardContainer}>
+        {/* Card Image */}
+        <Image source={{ uri: item.images.small }} style={styles.cardImage} />
 
-      {/* Card Info */}
-      <View style={styles.cardInfo}>
-        <Text style={styles.cardName}>{item.name}</Text>
-        <Text style={styles.cardText}>SuperType: {item.supertype}</Text>
-        <Text style={styles.cardText}>
-          Type: {item.types?.join(", ") || "Unknown"}
-        </Text>
-        <Text style={styles.cardText}>HP: {item.hp}</Text>
-      </View>
+        {/* Card Info */}
+        <View style={styles.cardInfo}>
+          <Text style={styles.cardName}>{item.name}</Text>
+          <Text style={styles.cardText}>SuperType: {item.supertype}</Text>
+          <Text style={styles.cardText}>
+            Type: {item.types?.join(", ") || "Unknown"}
+          </Text>
+          <Text style={styles.cardText}>HP: {item.hp}</Text>
+        </View>
 
-      <Pressable style={styles.iconContainer} onPress={handleRemoveFavorite}>
-        <FontAwesome name="heart" size={20} color={colors.text} />
+        <Pressable style={styles.iconContainer} onPress={handleRemoveFavorite}>
+          <FontAwesome name="heart" size={20} color={colors.text} />
+        </Pressable>
       </Pressable>
-    </Pressable>
+    </LinearGradient>
   );
 };
 
 export default CollectionItem;
 
 const styles = StyleSheet.create({
+  linear: {
+    paddingVertical: verticalScale(1),
+    paddingHorizontal: scale(1),
+    borderRadius: moderateScale(11),
+  },
   cardContainer: {
     flexDirection: "row",
     backgroundColor: colors.background,
@@ -65,8 +73,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 2,
-    borderWidth: 1,
-    borderColor: "#DDDDDD",
   },
   cardImage: {
     width: scale(80),

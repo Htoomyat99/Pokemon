@@ -4,6 +4,7 @@ import { TCardDetail } from "@/src/type/cardDetailType";
 import { toastService } from "@/src/utils/toastService";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import {
   Image,
@@ -95,12 +96,18 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         <Text style={styles.sectionTitle}>Attacks</Text>
         {card?.attacks &&
           card.attacks.map((attack, index) => (
-            <View key={index} style={styles.attack}>
-              <Text style={styles.attackName}>{attack.name}</Text>
-              <Text>Cost: {attack.cost.join(", ")}</Text>
-              <Text>Damage: {attack.damage}</Text>
-              <Text>{attack.text}</Text>
-            </View>
+            <LinearGradient
+              colors={["#FFCC33", "#FFB347", "#FF7F00"]}
+              key={index}
+              style={styles.linear}
+            >
+              <View style={styles.attack}>
+                <Text style={styles.attackName}>{attack.name}</Text>
+                <Text>Cost: {attack.cost.join(", ")}</Text>
+                <Text>Damage: {attack.damage}</Text>
+                <Text>{attack.text}</Text>
+              </View>
+            </LinearGradient>
           ))}
 
         {/* Set Info */}
@@ -203,8 +210,14 @@ const styles = StyleSheet.create({
     marginVertical: verticalScale(10),
     color: colors.text,
   },
-  attack: {
+  linear: {
+    paddingVertical: verticalScale(1),
+    paddingHorizontal: scale(1),
     marginBottom: verticalScale(15),
+    borderRadius: moderateScale(9),
+  },
+  attack: {
+    backgroundColor: colors.background,
     paddingVertical: verticalScale(10),
     paddingHorizontal: scale(15),
     borderWidth: 1,
