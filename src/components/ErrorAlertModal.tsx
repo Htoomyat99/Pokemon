@@ -1,6 +1,5 @@
 import { colors, fontSize } from "@/constants/Token";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { BlurView } from "expo-blur";
 import {
   Modal,
   Pressable,
@@ -31,12 +30,7 @@ const ErrorAlertModal = ({
       animationType="fade"
     >
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={hideModal}>
-        <BlurView
-          style={styles.blurContainer}
-          intensity={20}
-          tint="dark"
-          experimentalBlurMethod="dimezisBlurView"
-        >
+        <View style={styles.mainContainer}>
           <View style={styles.container}>
             <View style={styles.errorContainer}>
               <MaterialIcons
@@ -56,7 +50,7 @@ const ErrorAlertModal = ({
               <Text style={styles.btnText}>{btnText}</Text>
             </Pressable>
           </View>
-        </BlurView>
+        </View>
       </TouchableWithoutFeedback>
     </Modal>
   );
@@ -65,7 +59,7 @@ const ErrorAlertModal = ({
 export default ErrorAlertModal;
 
 const styles = StyleSheet.create({
-  blurContainer: {
+  mainContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -96,9 +90,9 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   divider: {
-    backgroundColor: "#49454F",
+    backgroundColor: "#DDDDDD",
     width: "100%",
-    height: 1,
+    height: StyleSheet.hairlineWidth,
     marginVertical: verticalScale(10),
   },
   btnContainer: {

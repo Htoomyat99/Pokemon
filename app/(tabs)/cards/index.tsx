@@ -11,6 +11,7 @@ import FilterList from "@/src/screens/cards/FilterList";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
 import { stringWithoutSpaces } from "@/src/utils/stringWithoutSpaces";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { BlurView } from "@react-native-community/blur";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -121,11 +122,19 @@ const Cards = () => {
           errModal={errModal}
         />
 
-        <ConfirmLogout
-          visible={modalVisible}
-          hideModal={() => setModalVisible(false)}
-          confirmAction={signOut}
-        />
+        {modalVisible && (
+          <BlurView
+            blurAmount={10}
+            blurType="light"
+            style={StyleSheet.absoluteFill}
+          >
+            <ConfirmLogout
+              visible={modalVisible}
+              hideModal={() => setModalVisible(false)}
+              confirmAction={signOut}
+            />
+          </BlurView>
+        )}
       </View>
     </SafeAreaView>
   );

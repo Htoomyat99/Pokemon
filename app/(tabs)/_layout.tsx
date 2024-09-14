@@ -1,11 +1,11 @@
 import { colors } from "@/constants/Token";
 import { useSession } from "@/src/providers/SessionPrvoider";
-import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
-import { Redirect, Tabs, usePathname, useSegments } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { BlurView } from "@react-native-community/blur";
+import { Redirect, Tabs, useSegments } from "expo-router";
 import { ActivityIndicator, Platform, StyleSheet } from "react-native";
 import { moderateScale, verticalScale } from "react-native-size-matters";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const TabLayout = () => {
   const { session, isLoading } = useSession();
@@ -41,18 +41,18 @@ const TabLayout = () => {
           height: Platform.OS === "ios" ? verticalScale(65) : verticalScale(55),
           display: hide ? "none" : "flex",
         },
-        // tabBarBackground: () => (
-        //   <BlurView
-        //     experimentalBlurMethod="dimezisBlurView"
-        //     intensity={80}
-        //     style={{
-        //       ...StyleSheet.absoluteFillObject,
-        //       overflow: "hidden",
-        //       borderTopLeftRadius: moderateScale(20),
-        //       borderTopRightRadius: moderateScale(20),
-        //     }}
-        //   />
-        // ),
+        tabBarBackground: () => (
+          <BlurView
+            blurAmount={40}
+            blurType="light"
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              overflow: "hidden",
+              borderTopLeftRadius: moderateScale(20),
+              borderTopRightRadius: moderateScale(20),
+            }}
+          />
+        ),
       }}
     >
       <Tabs.Screen

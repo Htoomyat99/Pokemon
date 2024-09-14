@@ -1,6 +1,5 @@
 import { colors, fontSize } from "@/constants/Token";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { BlurView } from "expo-blur";
 import {
   Modal,
   Pressable,
@@ -10,7 +9,6 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { TAuthError } from "../utils/cardType";
 
 interface Props {
   hideModal: () => void;
@@ -27,12 +25,7 @@ const ConfirmLogout = ({ hideModal, visible, confirmAction }: Props) => {
       animationType="fade"
     >
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={hideModal}>
-        <BlurView
-          style={styles.blurContainer}
-          intensity={40}
-          tint="dark"
-          experimentalBlurMethod="dimezisBlurView"
-        >
+        <View style={styles.blurContainer}>
           <View style={styles.container}>
             <View style={styles.errorContainer}>
               <MaterialIcons
@@ -49,7 +42,10 @@ const ConfirmLogout = ({ hideModal, visible, confirmAction }: Props) => {
             <Text style={styles.errText}>Are you sure you want to Logout?</Text>
 
             <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
             >
               <Pressable style={styles.btnContainer} onPress={hideModal}>
                 <Text style={{ ...styles.btnText, color: colors.background }}>
@@ -62,7 +58,7 @@ const ConfirmLogout = ({ hideModal, visible, confirmAction }: Props) => {
               </Pressable>
             </View>
           </View>
-        </BlurView>
+        </View>
       </TouchableWithoutFeedback>
     </Modal>
   );
@@ -102,9 +98,9 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(14),
   },
   divider: {
-    backgroundColor: "#49454F",
+    backgroundColor: "#DDDDDD",
     width: "100%",
-    height: 1,
+    height: StyleSheet.hairlineWidth,
     marginVertical: verticalScale(10),
   },
   btnContainer: {
