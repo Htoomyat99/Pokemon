@@ -41,24 +41,25 @@ const TabLayout = () => {
           height: Platform.OS === "ios" ? verticalScale(65) : verticalScale(55),
           display: hide ? "none" : "flex",
         },
-        tabBarBackground: () => (
-          <BlurView
-            blurAmount={40}
-            blurType="light"
-            style={{
-              ...StyleSheet.absoluteFillObject,
-              overflow: "hidden",
-              borderTopLeftRadius: moderateScale(20),
-              borderTopRightRadius: moderateScale(20),
-            }}
-          />
-        ),
+        // tabBarBackground: () => (
+        //   <BlurView
+        //     blurAmount={40}
+        //     blurType="light"
+        //     style={{
+        //       ...StyleSheet.absoluteFillObject,
+        //       overflow: "hidden",
+        //       borderTopLeftRadius: moderateScale(20),
+        //       borderTopRightRadius: moderateScale(20),
+        //     }}
+        //   />
+        // ),
       }}
     >
       <Tabs.Screen
         name="cards"
         options={{
           title: "Cards",
+          tabBarHideOnKeyboard: true,
           tabBarIcon: ({ color }) => (
             <MaterialIcons
               name="catching-pokemon"

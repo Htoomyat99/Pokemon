@@ -1,3 +1,4 @@
+import Skeleton from "@/src/components/Skeleton";
 import CardDetailItem from "@/src/screens/cards/CardDetailItem";
 import { useLocalSearchParams } from "expo-router";
 

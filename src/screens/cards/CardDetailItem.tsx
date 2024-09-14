@@ -116,7 +116,7 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         </Text>
 
         {/* Pricing Information */}
-        {card.tcgplayer.prices.holofoil && (
+        {card.tcgplayer.prices && (
           <View>
             <Text style={styles.sectionTitle}>Prices</Text>
 

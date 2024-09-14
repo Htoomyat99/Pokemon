@@ -1,11 +1,8 @@
-import LoadingView from "@/src/components/LoadingView";
+import Skeleton from "@/src/components/Skeleton";
 import { useCardDetail } from "@/src/hooks/useQuery";
 import CardDetailItem from "@/src/screens/cards/CardDetailItem";
-import { TCardDetail } from "@/src/utils/cardDetailType";
 import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
-import { Alert, View } from "react-native";
-import { verticalScale } from "react-native-size-matters";
+import { Alert } from "react-native";
 
 const CardDetail = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -16,12 +13,7 @@ const CardDetail = () => {
     return Alert.alert("Error", error?.message);
   }
 
-  if (isLoading)
-    return (
-      <View style={{ marginTop: verticalScale(50) }}>
-        <LoadingView />
-      </View>
-    );
+  if (isLoading) return <Skeleton />;
 
   return <CardDetailItem card={data.data} />;
 };
