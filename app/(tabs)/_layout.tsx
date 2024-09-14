@@ -2,13 +2,16 @@ import { colors } from "@/constants/Token";
 import { useSession } from "@/src/providers/SessionPrvoider";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { BlurView } from "expo-blur";
-import { Redirect, Tabs } from "expo-router";
+import { Redirect, Tabs, usePathname, useSegments } from "expo-router";
 import { ActivityIndicator, Platform, StyleSheet } from "react-native";
 import { moderateScale, verticalScale } from "react-native-size-matters";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 const TabLayout = () => {
   const { session, isLoading } = useSession();
+
+  const segments: string[] = useSegments();
+  const hide = segments.includes("detail") || segments.includes("[id]");
 
   if (isLoading)
     return <ActivityIndicator size={"small"} color={colors.text} />;
@@ -24,7 +27,7 @@ const TabLayout = () => {
         tabBarInactiveTintColor: colors.textMuted,
         tabBarLabelStyle: {
           fontSize: moderateScale(12),
-          fontWeight: "500",
+          fontFamily: "InterSemiBold",
         },
         headerShown: false,
         tabBarStyle: {
@@ -36,6 +39,7 @@ const TabLayout = () => {
           paddingBottom:
             Platform.OS === "android" ? moderateScale(10) : moderateScale(25),
           height: Platform.OS === "ios" ? verticalScale(65) : verticalScale(55),
+          display: hide ? "none" : "flex",
         },
         // tabBarBackground: () => (
         //   <BlurView
