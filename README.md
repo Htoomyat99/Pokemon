@@ -1,6 +1,6 @@
 # 🎴 Pokémon Card Collection App
 
-Welcome to the **Pokémon Card Collection App**! This app allows you to browse and manage your Pokémon card collection. You can search, filter, and view details for each card while managing your personal card collections.
+Welcome to the **Pokémon Card Collection App**! This app allows users to browse and manage their Pokémon card collection. You can search, filter, and view details for each card while managing your personal collections.
 
 ✨ Built using **React Native** with **Expo** to ensure a smooth and responsive experience!
 
@@ -12,6 +12,23 @@ Welcome to the **Pokémon Card Collection App**! This app allows you to browse a
   - 🔍 **Search cards** by name and filter by type.
   - 📝 View detailed information for each card.
   - 📥 **Add to collections** and 📤 **remove from collections**.
+
+## 📸 Screenshots
+
+### 🔐 Login Screen
+![Login Screen](./assets/images/preview1.png)
+
+### 🃏 Card List Screen
+![Card List Screen](./assets/images/preview2.png)
+
+### 🔍 Filter and Search Screen
+![Filter and Search Screen](./assets/images/preview3.png)
+
+### 📝 Card Detail Screen
+![Card Detail Screen](./assets/images/preview4.png)
+
+### 📥 Collections Screen
+![Collections Screen](./assets/images/preview5.png)
 
 ## 🛠️ Tech Stack
 
