@@ -73,6 +73,7 @@ const Cards = () => {
           showFilter={showFilter}
           setShowFilter={setShowFilter}
           goAction={(text) => setSearchText(text)}
+          cardType={cardType}
         />
 
         {showFilter && (

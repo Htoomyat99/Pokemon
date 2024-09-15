@@ -1,4 +1,5 @@
 import { colors, fontSize } from "@/constants/Token";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -21,11 +22,16 @@ const EmptyCollection = () => {
 
       <Text style={styles.noCollectionText}>No Collection yet</Text>
 
-      <Pressable style={styles.btnContainer} onPress={goCards}>
-        <Text style={{ ...styles.noCollectionText, color: "#888888" }}>
-          View Cards
-        </Text>
-      </Pressable>
+      <LinearGradient
+        colors={["#FFCC33", "#FF7F00", "#FFB347"]}
+        style={styles.linear}
+      >
+        <Pressable style={styles.btnContainer} onPress={goCards}>
+          <Text style={{ ...styles.noCollectionText, color: "#888888" }}>
+            View Cards
+          </Text>
+        </Pressable>
+      </LinearGradient>
     </View>
   );
 };
@@ -48,9 +54,14 @@ const styles = StyleSheet.create({
     fontFamily: "InterSemiBold",
     color: colors.textMuted,
   },
+  linear: {
+    marginTop: verticalScale(50),
+    paddingVertical: verticalScale(1),
+    paddingHorizontal: scale(1),
+    borderRadius: moderateScale(8),
+  },
   btnContainer: {
     backgroundColor: colors.background,
-    marginTop: verticalScale(50),
     paddingVertical: verticalScale(6),
     paddingHorizontal: scale(15),
     borderRadius: moderateScale(7),

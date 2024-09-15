@@ -1,7 +1,5 @@
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
-// const apiKey = process.env.POKE_API_KEY || "";
-// const url = process.env.POKE_API_URL || "";
 const apiKey = "8f2aef6b-6b1f-4c1c-8f6e-6b1f8f6e8f6e";
 const url = "https://api.pokemontcg.io/v2";
 const limit = 14;

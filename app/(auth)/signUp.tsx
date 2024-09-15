@@ -67,8 +67,7 @@ const SignUp = () => {
         >
           <View style={{ alignItems: "center" }}>
             <Image
-              // source={require("@/assets/images/pokemon.png")}
-              source={require("@/assets/images/error.png")}
+              source={require("@/assets/images/pokemon.png")}
               style={styles.image}
             />
           </View>

@@ -8,10 +8,12 @@ const SearchAndFilter = ({
   setShowFilter,
   showFilter,
   goAction,
+  cardType,
 }: {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   showFilter: boolean;
   goAction: (text: string) => void;
+  cardType: string;
 }) => {
   const [example, setExample] = useState("");
   const [typingTimeout, setTypingTimeout] = useState<ReturnType<
@@ -51,6 +53,8 @@ const SearchAndFilter = ({
       </View>
 
       <Pressable style={styles.filterContainer}>
+        {cardType && <View style={styles.dot} />}
+
         <Ionicons
           onPress={toggleShowFilter}
           name="filter"
@@ -95,5 +99,14 @@ const styles = StyleSheet.create({
     paddingVertical: verticalScale(8),
     paddingHorizontal: scale(10),
     borderRadius: moderateScale(7),
+  },
+  dot: {
+    width: scale(10),
+    height: scale(10),
+    borderRadius: moderateScale(5),
+    backgroundColor: colors.primary,
+    position: "absolute",
+    top: verticalScale(2),
+    right: verticalScale(2),
   },
 });
