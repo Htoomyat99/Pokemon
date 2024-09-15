@@ -28,4 +28,8 @@ export const createCollectionSlice = (
     }),
   isFavorite: (id) =>
     get().collections.some((item: TCardDetail) => item.id === id),
+  resetCollection: () =>
+    set((state) => {
+      state.collections = [];
+    }),
 });

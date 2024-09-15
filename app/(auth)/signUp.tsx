@@ -50,6 +50,7 @@ const SignUp = () => {
     }
 
     useStore.getState().setUser({ userName, password });
+    useStore.getState().resetCollection();
     signUp();
     router.replace("/(tabs)/cards");
   };
