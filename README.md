@@ -1,50 +1,75 @@
-# Welcome to your Expo app 👋
+# 🎴 Pokémon Card Collection App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to the **Pokémon Card Collection App**! This app allows you to browse and manage your Pokémon card collection. You can search, filter, and view details for each card while managing your personal card collections.
 
-## Get started
+✨ Built using **React Native** with **Expo** to ensure a smooth and responsive experience!
 
-1. Install dependencies
+## 🚀 Features
 
-   ```bash
-   npm install
-   ```
+- 🔒 **Local Authentication Flow:** Secure login and signup screens.
+- 🎴 **Card Screen:**
+  - 🃏 View a list of Pokémon cards with **pagination**.
+  - 🔍 **Search cards** by name and filter by type.
+  - 📝 View detailed information for each card.
+  - 📥 **Add to collections** and 📤 **remove from collections**.
 
-2. Start the app
+## 🛠️ Tech Stack
 
-   ```bash
-    npx expo start
-   ```
+- **[Expo](https://expo.dev/):** 🚀 Framework for building native apps.
+- **[Expo Prebuild](https://docs.expo.dev/workflow/prebuild/):** Generate native iOS and Android code.
+- **[Expo Router](https://expo.github.io/router/docs/):** 🧭 Intuitive navigation for managing routes.
+- **[Expo Vector Icons](https://docs.expo.dev/guides/icons/):** 🎨 For beautifully styled icons.
+- **[React Query (TanStack)](https://tanstack.com/query/v4):** 🗂️ Efficient API fetching and caching.
+- **[MMKV Storage](https://github.com/mrousavy/react-native-mmkv):** ⚡ Super-fast local storage.
+- **[Zustand](https://zustand-demo.pmnd.rs/):** 🐻 Lightweight and powerful state management.
+- **[React Native Toast Message](https://github.com/calintamas/react-native-toast-message):** 🍞 For elegant toast notifications.
+- **[React Native Size Matters](https://github.com/nirsky/react-native-size-matters):** 📐 Ensure your app looks great on all screen sizes.
 
-In the output, you'll find options to open the app in a
+## 📦 Setup and Installation
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/your-repo-url/pokemon-card-collection-app.git
+    ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+2. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-## Get a fresh project
+3. For iOS, generate native code and run the app:
+    ```bash
+    npx expo run:ios
+    ```
 
-When you're ready, run:
+4. For Android, generate native code and run the app:
+    ```bash
+    npx expo run:android
+    ```
 
-```bash
-npm run reset-project
-```
+## 🌐 API
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This app fetches card data from the [Pokémon TCG API](https://docs.pokemontcg.io/). The API is used for:
+- 📜 Fetching cards with **pagination**.
+- 🔍 **Searching** cards by name.
+- 🎨 **Filtering** cards by type.
+- 📝 Viewing detailed card information.
 
-## Learn more
+## 🎯 Functionality
 
-To learn more about developing your project with Expo, look at the following resources:
+### 🔐 Local Authentication Flow
+- Secure authentication with **signup** and **login** functionalities.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 🎴 Card Screen
+- **Search & Filter:** Instantly search for cards by name and filter them by type.
+- **Pagination:** Smoothly scroll through pages of cards.
+- **Card Detail:** Tap on any card to view its full details.
+- **Collections:** Easily manage your card collections by adding or removing cards.
 
-## Join the community
+## 📝 License
 
-Join our community of developers creating universal apps.
+This project is licensed under the MIT License.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+🌟 **Happy Collecting!** 🌟
