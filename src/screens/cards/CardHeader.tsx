@@ -20,7 +20,7 @@ const CardHeader = () => {
   return (
     <View style={styles.headerContainer}>
       <GradientText
-        colors={["#FFCC33", "#FF7F00", "#FFB347"]}
+        colors={["#FF512F", "#F09819", "#FF7F00"]}
         style={styles.headerText}
       >
         Pokémon

@@ -18,10 +18,7 @@ const FavoriteListScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <View style={styles.container}>
-        <GradientText
-          colors={["#FFCC33", "#FF7F00", "#FFB347"]}
-          style={styles.title}
-        >
+        <GradientText colors={["#FF512F", "#F09819"]} style={styles.title}>
           My Collections
         </GradientText>
 
