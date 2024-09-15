@@ -16,11 +16,11 @@ Welcome to the **Pokémon Card Collection App**! This app allows users to browse
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="./assets/images/preview1.png" alt="Login Screen" width="180"/>
-  <img src="./assets/images/preview2.png" alt="Card List Screen" width="180"/>
-  <img src="./assets/images/preview3.png" alt="Filter and Search Screen" width="180"/>
-  <img src="./assets/images/preview4.png" alt="Card Detail Screen" width="180"/>
-  <img src="./assets/images/preview5.png" alt="Collections Screen" width="180"/>
+  <img src="./assets/images/preview1.png" alt="Login Screen" width="160"/>
+  <img src="./assets/images/preview2.png" alt="Card List Screen" width="160"/>
+  <img src="./assets/images/preview3.png" alt="Filter and Search Screen" width="160"/>
+  <img src="./assets/images/preview4.png" alt="Card Detail Screen" width="160"/>
+  <img src="./assets/images/preview5.png" alt="Collections Screen" width="160"/>
 </p>
 
 ## 🛠️ Tech Stack
@@ -39,7 +39,7 @@ Welcome to the **Pokémon Card Collection App**! This app allows users to browse
 
 1. Clone this repository:
     ```bash
-    git clone https://github.com/your-repo-url/pokemon-card-collection-app.git
+    git clone https://github.com/Htoomyat99/Pokemon
     ```
 
 2. Install the dependencies:
