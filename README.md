@@ -15,20 +15,13 @@ Welcome to the **Pokémon Card Collection App**! This app allows users to browse
 
 ## 📸 Screenshots
 
-### 🔐 Login Screen
-![Login Screen](./assets/images/preview1.png)
-
-### 🃏 Card List Screen
-![Card List Screen](./assets/images/preview2.png)
-
-### 🔍 Filter and Search Screen
-![Filter and Search Screen](./assets/images/preview3.png)
-
-### 📝 Card Detail Screen
-![Card Detail Screen](./assets/images/preview4.png)
-
-### 📥 Collections Screen
-![Collections Screen](./assets/images/preview5.png)
+<p align="center">
+  <img src="./assets/images/preview1.png" alt="Login Screen" width="180"/>
+  <img src="./assets/images/preview2.png" alt="Card List Screen" width="180"/>
+  <img src="./assets/images/preview3.png" alt="Filter and Search Screen" width="180"/>
+  <img src="./assets/images/preview4.png" alt="Card Detail Screen" width="180"/>
+  <img src="./assets/images/preview5.png" alt="Collections Screen" width="180"/>
+</p>
 
 ## 🛠️ Tech Stack
 
