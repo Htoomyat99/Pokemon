@@ -1,5 +1,6 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import EmptyCollection from "@/src/components/EmptyCollection";
+import GradientText from "@/src/components/GradientText";
 import CollectionItem from "@/src/screens/collections/CollectionItem";
 import { useStore } from "@/src/store/store";
 import {
@@ -7,7 +8,6 @@ import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
-  Text,
   View,
 } from "react-native";
 import { verticalScale } from "react-native-size-matters";
@@ -18,7 +18,12 @@ const FavoriteListScreen = () => {
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <View style={styles.container}>
-        <Text style={styles.title}>My Collections</Text>
+        <GradientText
+          colors={["#FFCC33", "#FF7F00", "#FFB347"]}
+          style={styles.title}
+        >
+          My Collections
+        </GradientText>
 
         <View style={styles.divider} />
 

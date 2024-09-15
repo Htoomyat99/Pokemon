@@ -6,6 +6,7 @@ import { colors, fontSize } from "@/constants/Token";
 import { moderateScale, verticalScale, scale } from "react-native-size-matters";
 import ConfirmLogout from "@/src/components/ConfirmLogout";
 import { BlurView } from "expo-blur";
+import GradientText from "@/src/components/GradientText";
 
 const CardHeader = () => {
   const [logoutModalVisible, setlogoutModalVisible] = useState(false);
@@ -18,7 +19,12 @@ const CardHeader = () => {
 
   return (
     <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Pokémon</Text>
+      <GradientText
+        colors={["#FFCC33", "#FF7F00", "#FFB347"]}
+        style={styles.headerText}
+      >
+        Pokémon
+      </GradientText>
 
       <AntDesign
         onPress={handleLogout}

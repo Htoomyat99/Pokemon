@@ -1,5 +1,6 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
 import ErrorAlertModal from "@/src/components/ErrorAlertModal";
+import GradientText from "@/src/components/GradientText";
 import LoadingView from "@/src/components/LoadingView";
 import NotFound from "@/src/components/NotFound";
 import { useCardFilter } from "@/src/hooks/useQuery";
