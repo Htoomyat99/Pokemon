@@ -72,7 +72,7 @@ const Cards = () => {
         <SearchAndFilter
           showFilter={showFilter}
           setShowFilter={setShowFilter}
-          goAction={(text) => setSearchText(text)}
+          handleSearch={(text) => setSearchText(text)}
           cardType={cardType}
         />
 
@@ -133,6 +133,5 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     flex: 1,
-    // marginTop: verticalScale(25),
   },
 });

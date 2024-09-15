@@ -1,8 +1,5 @@
-import { MMKV } from "react-native-mmkv";
 import { TCardDetail } from "../type/cardDetailType";
 import { AuthStateType, CollectionStateType, SetType } from "./type";
-
-export const storage = new MMKV();
 
 export const createAuthSlice = (set: SetType): AuthStateType => ({
   user: { userName: "", password: "" },

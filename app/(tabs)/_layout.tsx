@@ -3,7 +3,7 @@ import { useSession } from "@/src/providers/SessionPrvoider";
 import { FontAwesome } from "@expo/vector-icons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Redirect, Tabs, useSegments } from "expo-router";
-import { ActivityIndicator, Platform, StyleSheet } from "react-native";
+import { ActivityIndicator, Platform } from "react-native";
 import { moderateScale, verticalScale } from "react-native-size-matters";
 
 const TabLayout = () => {

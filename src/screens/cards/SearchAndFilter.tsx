@@ -1,21 +1,25 @@
 import { colors, fontSize } from "@/constants/Token";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
+
+interface Props {
+  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  showFilter: boolean;
+  handleSearch: (text: string) => void;
+  cardType: string;
+}
+
 const SearchAndFilter = ({
   setShowFilter,
   showFilter,
-  goAction,
+  handleSearch,
   cardType,
-}: {
-  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
-  showFilter: boolean;
-  goAction: (text: string) => void;
-  cardType: string;
-}) => {
-  const [example, setExample] = useState("");
+}: Props) => {
+  const [text, setText] = useState("");
   const [typingTimeout, setTypingTimeout] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
@@ -25,17 +29,22 @@ const SearchAndFilter = ({
   };
 
   const handleTextChange = (newText: string) => {
-    setExample(newText);
+    setText(newText);
 
     if (typingTimeout) {
       clearTimeout(typingTimeout);
     }
 
     const timeout = setTimeout(() => {
-      goAction(newText);
+      handleSearch(newText);
     }, 800);
 
     setTypingTimeout(timeout);
+  };
+
+  const handleClearSearch = () => {
+    setText("");
+    handleSearch("");
   };
 
   return (
@@ -44,16 +53,30 @@ const SearchAndFilter = ({
         <Feather name="search" size={moderateScale(23)} color={"#6E8194"} />
 
         <TextInput
-          value={example}
+          value={text}
           onChangeText={handleTextChange}
           style={styles.searchInput}
           cursorColor={colors.text}
           placeholder="Search Cards"
         />
+
+        {text && (
+          <Feather
+            onPress={handleClearSearch}
+            name="x"
+            size={moderateScale(20)}
+            color={"#6E8194"}
+          />
+        )}
       </View>
 
       <Pressable style={styles.filterContainer}>
-        {cardType && <View style={styles.dot} />}
+        {cardType && (
+          <LinearGradient
+            colors={["#FF512F", "#F09819", "#FF7F00"]}
+            style={styles.dot}
+          />
+        )}
 
         <Ionicons
           onPress={toggleShowFilter}
@@ -104,7 +127,6 @@ const styles = StyleSheet.create({
     width: scale(10),
     height: scale(10),
     borderRadius: moderateScale(5),
-    backgroundColor: colors.primary,
     position: "absolute",
     top: verticalScale(2),
     right: verticalScale(2),

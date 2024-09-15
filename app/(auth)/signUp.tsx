@@ -51,7 +51,7 @@ const SignUp = () => {
 
     useStore.getState().setUser({ userName, password });
     signUp();
-    router.push("/(tabs)/cards");
+    router.replace("/(tabs)/cards");
   };
 
   return (

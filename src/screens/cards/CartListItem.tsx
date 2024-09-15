@@ -11,7 +11,7 @@ interface Props {
 
 const CardListItem = ({ item }: Props) => {
   const goCardDetail = () => {
-    router.push(`/cards/${item.id}`);
+    router.navigate(`/cards/${item.id}`);
   };
 
   return (
@@ -25,10 +25,13 @@ const CardListItem = ({ item }: Props) => {
           source={{ uri: item.images.small }}
           style={styles.cardImage}
         />
+
         <Text style={styles.cardName}>{item.name}</Text>
+
         {item.types && (
           <Text style={styles.cardInfo}>Type: {item.types.join(", ")}</Text>
         )}
+
         <Text style={styles.cardInfo}>Rarity: {item.rarity}</Text>
       </Pressable>
     </LinearGradient>

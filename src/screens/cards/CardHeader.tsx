@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { useSession } from "@/src/providers/SessionPrvoider";
 import { colors, fontSize } from "@/constants/Token";
-import { moderateScale, verticalScale, scale } from "react-native-size-matters";
 import ConfirmLogout from "@/src/components/ConfirmLogout";
-import { BlurView } from "expo-blur";
 import GradientText from "@/src/components/GradientText";
+import { useSession } from "@/src/providers/SessionPrvoider";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { BlurView } from "expo-blur";
+import { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 const CardHeader = () => {
   const [logoutModalVisible, setlogoutModalVisible] = useState(false);
@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingTop: verticalScale(15),
   },
   headerText: {
     fontFamily: "InterSemiBold",
     fontSize: fontSize.lg,
     color: colors.text,
-    marginTop: verticalScale(15),
   },
   iconContainer: {
     paddingVertical: verticalScale(5),

@@ -66,7 +66,7 @@ const SignUp = () => {
     }
 
     signIn();
-    router.push("/(tabs)/cards");
+    router.replace("/(tabs)/cards");
   };
 
   return (

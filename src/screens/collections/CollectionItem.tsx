@@ -14,7 +14,7 @@ const CollectionItem = ({ item }: { item: TCardDetail }) => {
   const isFavorite = useStore((state) => state.isFavorite(item.id));
   const { addFavoriteToast, removeFavoriteToast } = toastService();
   const handleCardPress = () => {
-    router.push({
+    router.navigate({
       pathname: "/collections/detail",
       params: { card: JSON.stringify(item) },
     });

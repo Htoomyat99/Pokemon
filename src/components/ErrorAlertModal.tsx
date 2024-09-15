@@ -1,5 +1,7 @@
 import { colors, fontSize } from "@/constants/Token";
+import { TAuthError } from "@/src/type/StausAuth";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { BlurView } from "expo-blur";
 import {
   Modal,
   Pressable,
@@ -9,8 +11,6 @@ import {
   View,
 } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
-import { TAuthError } from "@/src/type/StausAuth";
-import { BlurView } from "expo-blur";
 
 interface Props {
   hideModal: () => void;

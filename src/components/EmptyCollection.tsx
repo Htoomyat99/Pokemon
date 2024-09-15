@@ -32,7 +32,7 @@ const EmptyCollection = () => {
             colors={["#FFCC33", "#FF7F00", "#FFB347"]}
             style={styles.viewCardText}
           >
-            View Cards
+            Browse Cards
           </GradientText>
         </Pressable>
       </LinearGradient>

@@ -1,4 +1,5 @@
 import { colors, fontSize, screenPadding } from "@/constants/Token";
+import GradientText from "@/src/components/GradientText";
 import { useStore } from "@/src/store/store";
 import { TCardDetail } from "@/src/type/cardDetailType";
 import { toastService } from "@/src/utils/toastService";
@@ -51,7 +52,9 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
           />
         </Pressable>
 
-        <Text style={styles.headerText}>Card Details</Text>
+        <GradientText colors={["#FF512F", "#F09819"]} style={styles.headerText}>
+          Card Details
+        </GradientText>
 
         <Pressable style={styles.iconContainer} onPress={toggleFavorite}>
           <FontAwesome
