@@ -39,7 +39,7 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
     }
   };
 
-  const cardPrice = card?.tcgplayer.prices.holofoil;
+  const cardPrice = card?.tcgplayer ? card.tcgplayer.prices.holofoil : "";
 
   return (
     <SafeAreaView style={{ flex: 1, marginTop: StatusBar.currentHeight }}>
@@ -139,7 +139,7 @@ const CardDetailItem = ({ card }: { card: TCardDetail }) => {
         </Text>
 
         {/* Pricing Information */}
-        {card.tcgplayer.prices.holofoil && (
+        {cardPrice && (
           <View>
             <Text style={styles.sectionTitle}>Prices</Text>
 
