@@ -6,6 +6,14 @@ const CardsLayout = () => {
       <Stack.Screen name="index" options={{ headerShown: false }} />
 
       <Stack.Screen
+        name="filter"
+        options={{
+          headerShown: false,
+          presentation: "modal",
+        }}
+      />
+
+      <Stack.Screen
         name="[id]"
         options={{
           headerShown: false,

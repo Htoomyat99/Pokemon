@@ -7,6 +7,7 @@ const limit = fetchRate.limit;
 const apiUrl = {
   cards: `${url}/cards`,
   types: `${url}/types`,
+  rarities: `${url}/rarities`,
 };
 
 interface Props {
@@ -42,6 +43,20 @@ export const fetchCardType = async () => {
 
   if (!response.ok) {
     throw new Error("Failed to fetch card type");
+  }
+
+  return response.json();
+};
+
+export const fetchRarities = async () => {
+  const response = await fetch(apiUrl.rarities, {
+    headers: {
+      "X-Api-Key": apiKey,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch card rarity");
   }
 
   return response.json();

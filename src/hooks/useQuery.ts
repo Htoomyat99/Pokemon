@@ -4,6 +4,7 @@ import {
   fetchCardDetail,
   fetchCardType,
   fetchfilterCards,
+  fetchRarities,
 } from "@/src/utils/fetch";
 
 const limit = fetchRate.limit;
@@ -25,6 +26,13 @@ export const useCardType = () => {
   return useQuery({
     queryKey: ["types"],
     queryFn: fetchCardType,
+  });
+};
+
+export const useRarities = () => {
+  return useQuery({
+    queryKey: ["rarities"],
+    queryFn: fetchRarities,
   });
 };
 

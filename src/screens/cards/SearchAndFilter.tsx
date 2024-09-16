@@ -2,6 +2,7 @@ import { colors, fontSize } from "@/constants/Token";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
@@ -19,13 +20,18 @@ const SearchAndFilter = ({
   handleSearch,
   cardType,
 }: Props) => {
+  const router = useRouter();
+
   const [text, setText] = useState("");
   const [typingTimeout, setTypingTimeout] = useState<ReturnType<
     typeof setTimeout
   > | null>(null);
 
   const toggleShowFilter = () => {
-    setShowFilter(!showFilter);
+    // setShowFilter(!showFilter);
+    router.navigate("/cards/filter");
+
+    console.log("hie");
   };
 
   const handleTextChange = (newText: string) => {

@@ -8,6 +8,7 @@ import CardListItem from "@/src/screens/cards/CartListItem";
 import FilterList from "@/src/screens/cards/FilterList";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
 import { stringWithoutSpaces } from "@/src/utils/stringWithoutSpaces";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   FlatList,
@@ -21,6 +22,12 @@ import {
 import { verticalScale } from "react-native-size-matters";
 
 const Cards = () => {
+  const { type, rarity } = useLocalSearchParams<{
+    type: string;
+    rarity: string;
+  }>();
+
+  console.log(typeof type, typeof rarity);
   const [errModal, setErrModal] = useState({ status: false, errMsg: "" });
   const [showFilter, setShowFilter] = useState(false);
 
