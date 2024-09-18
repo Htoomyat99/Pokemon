@@ -15,11 +15,12 @@ interface Props {
   pageParam?: number;
 }
 export const fetchfilterCards = async ({ pageParam = 1, queryKey }: Props) => {
-  const [_, search, type] = queryKey;
+  const [_, search, type, rarity] = queryKey;
 
   let query = "";
   if (search) query += `name:${search}*`;
   if (type) query += query ? ` AND types:${type}` : `types:${type}`;
+  if (rarity) query += query ? ` AND rarity:${rarity}` : `rarity:${rarity}`;
 
   const response = await fetch(
     `${apiUrl.cards}?page=${pageParam}&pageSize=${limit}&q=${encodeURIComponent(

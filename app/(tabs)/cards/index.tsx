@@ -27,7 +27,6 @@ const Cards = () => {
     rarity: string;
   }>();
 
-  console.log(typeof type, typeof rarity);
   const [errModal, setErrModal] = useState({ status: false, errMsg: "" });
   const [showFilter, setShowFilter] = useState(false);
 
@@ -46,7 +45,7 @@ const Cards = () => {
     isFetchingNextPage,
     refetch,
     isFetching,
-  } = useCardFilter(stringWithoutSpacesText, cardType);
+  } = useCardFilter(stringWithoutSpacesText, type, rarity);
 
   const filterCardData = filterData?.pages.flatMap((page) => page.data) || [];
 
