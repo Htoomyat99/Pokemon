@@ -1,5 +1,10 @@
 import { TCardDetail } from "../type/cardDetailType";
-import { AuthStateType, CollectionStateType, SetType } from "./type";
+import {
+  AuthStateType,
+  CollectionStateType,
+  FilterStateType,
+  SetType,
+} from "@/src/store/type";
 
 export const createAuthSlice = (set: SetType): AuthStateType => ({
   user: { userName: "", password: "" },
@@ -32,4 +37,19 @@ export const createCollectionSlice = (
     set((state) => {
       state.collections = [];
     }),
+});
+
+export const createFilterSlice = (set: SetType): FilterStateType => ({
+  typeSelected: "",
+  raritySelected: "",
+  setTypeSelected: (newType) => {
+    set((state) => {
+      state.typeSelected = newType;
+    });
+  },
+  setRaritySelected(newRarity) {
+    set((state) => {
+      state.raritySelected = newRarity;
+    });
+  },
 });

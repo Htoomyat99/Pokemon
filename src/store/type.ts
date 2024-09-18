@@ -16,4 +16,11 @@ export interface CollectionStateType {
   resetCollection: () => void;
 }
 
-export type StoreState = AuthStateType & CollectionStateType;
+export interface FilterStateType {
+  typeSelected: string;
+  raritySelected: string;
+  setTypeSelected: (newType: string) => void;
+  setRaritySelected: (newRarity: string) => void;
+}
+
+export type StoreState = AuthStateType & CollectionStateType & FilterStateType;

@@ -1,26 +1,21 @@
 import { colors, fontSize } from "@/constants/Token";
+import { useStore } from "@/src/store/store";
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 interface Props {
-  setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
-  showFilter: boolean;
   handleSearch: (text: string) => void;
-  cardType: string;
 }
 
-const SearchAndFilter = ({
-  setShowFilter,
-  showFilter,
-  handleSearch,
-  cardType,
-}: Props) => {
+const SearchAndFilter = ({ handleSearch }: Props) => {
   const router = useRouter();
+  const cardType = useStore((state) => state.typeSelected);
+  const cardRarity = useStore((state) => state.raritySelected);
 
   const [text, setText] = useState("");
   const [typingTimeout, setTypingTimeout] = useState<ReturnType<
@@ -28,10 +23,7 @@ const SearchAndFilter = ({
   > | null>(null);
 
   const toggleShowFilter = () => {
-    // setShowFilter(!showFilter);
     router.navigate("/cards/filter");
-
-    console.log("hie");
   };
 
   const handleTextChange = (newText: string) => {
@@ -77,7 +69,7 @@ const SearchAndFilter = ({
       </View>
 
       <Pressable style={styles.filterContainer}>
-        {cardType && (
+        {(cardType || cardRarity) && (
           <LinearGradient
             colors={["#FF512F", "#F09819", "#FF7F00"]}
             style={styles.dot}

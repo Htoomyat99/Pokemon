@@ -5,7 +5,6 @@ import NotFound from "@/src/components/NotFound";
 import { useCardFilter } from "@/src/hooks/useQuery";
 import CardHeader from "@/src/screens/cards/CardHeader";
 import CardListItem from "@/src/screens/cards/CartListItem";
-import FilterList from "@/src/screens/cards/FilterList";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
 import { stringWithoutSpaces } from "@/src/utils/stringWithoutSpaces";
 import { useLocalSearchParams } from "expo-router";
@@ -28,10 +27,8 @@ const Cards = () => {
   }>();
 
   const [errModal, setErrModal] = useState({ status: false, errMsg: "" });
-  const [showFilter, setShowFilter] = useState(false);
 
   const [searchText, setSearchText] = useState<string>("");
-  const [cardType, setCardType] = useState("");
 
   const stringWithoutSpacesText = stringWithoutSpaces(searchText);
 
@@ -45,7 +42,7 @@ const Cards = () => {
     isFetchingNextPage,
     refetch,
     isFetching,
-  } = useCardFilter(stringWithoutSpacesText, type, rarity);
+  } = useCardFilter(stringWithoutSpacesText, type, "");
 
   const filterCardData = filterData?.pages.flatMap((page) => page.data) || [];
 
@@ -75,16 +72,7 @@ const Cards = () => {
           Search for pokemon by name or using its national number
         </Text>
 
-        <SearchAndFilter
-          showFilter={showFilter}
-          setShowFilter={setShowFilter}
-          handleSearch={(text) => setSearchText(text)}
-          cardType={cardType}
-        />
-
-        {showFilter && (
-          <FilterList cardType={cardType} setCardType={setCardType} />
-        )}
+        <SearchAndFilter handleSearch={(text) => setSearchText(text)} />
 
         <View style={styles.flatListContainer}>
           <FlatList

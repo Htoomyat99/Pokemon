@@ -4,6 +4,7 @@ import GridView from "@/src/components/GridView";
 import LoadingView from "@/src/components/LoadingView";
 import NotFound from "@/src/components/NotFound";
 import { useCardType, useRarities } from "@/src/hooks/useQuery";
+import { useStore } from "@/src/store/store";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
 import { useState } from "react";
@@ -27,11 +28,18 @@ const Filter = () => {
     isError: cardIsError,
   } = useCardType();
 
-  const [typeSelected, setTypeSelected] = useState<string>("");
-  const [raritySelected, setRaritySelected] = useState<string>("");
+  const type = useStore.getState().typeSelected;
+  const rarity = useStore.getState().raritySelected;
+  const updateType = useStore((state) => state.setTypeSelected);
+  const updateRarity = useStore((state) => state.setRaritySelected);
+
+  const [typeSelected, setTypeSelected] = useState<string>(type);
+  const [raritySelected, setRaritySelected] = useState<string>(rarity);
 
   const handleFilter = () => {
-    console.log("filter >>>", typeSelected, raritySelected);
+    updateType(typeSelected);
+    updateRarity(raritySelected);
+
     router.navigate({
       pathname: "/cards",
       params: { type: typeSelected, rarity: raritySelected },
@@ -42,27 +50,17 @@ const Filter = () => {
 
   if (isLoading || cardIsLoading) return <LoadingView />;
 
-  const selectMode = typeSelected || raritySelected;
-
   return (
     <SafeAreaView style={{ flex: 1, paddingTop: StatusBar.currentHeight }}>
       <GradientText colors={["#FF3330", "#FFB520"]} style={styles.chooseText}>
         Choose Types and Rarities
       </GradientText>
 
-      <Pressable
-        onPress={handleFilter}
-        disabled={selectMode ? false : true}
-        style={{
-          ...styles.filterContainer,
-          backgroundColor: colors.background,
-          borderColor: selectMode ? colors.text : colors.textMuted,
-        }}
-      >
+      <Pressable onPress={handleFilter} style={styles.filterContainer}>
         <FontAwesome5
           name="filter"
           size={moderateScale(20)}
-          color={selectMode ? colors.text : colors.textMuted}
+          color={colors.text}
         />
       </Pressable>
 
@@ -104,5 +102,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: scale(8),
     borderRadius: moderateScale(6),
     marginTop: verticalScale(15),
+    backgroundColor: colors.background,
+    borderColor: colors.text,
   },
 });

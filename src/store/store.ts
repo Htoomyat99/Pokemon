@@ -2,7 +2,11 @@ import { MMKV } from "react-native-mmkv";
 import { create } from "zustand";
 import { createJSONStorage, persist, StateStorage } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import { createAuthSlice, createCollectionSlice } from "./slices";
+import {
+  createAuthSlice,
+  createCollectionSlice,
+  createFilterSlice,
+} from "@/src/store/slices";
 import { StoreState } from "./type";
 
 export const storage = new MMKV();
@@ -25,6 +29,7 @@ export const useStore = create<StoreState>()(
     immer((set, get) => ({
       ...createAuthSlice(set),
       ...createCollectionSlice(set, get),
+      ...createFilterSlice(set),
     })),
     {
       name: "store",
