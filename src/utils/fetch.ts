@@ -15,18 +15,26 @@ interface Props {
   pageParam?: number;
 }
 export const fetchfilterCards = async ({ pageParam = 1, queryKey }: Props) => {
+  console.log("render");
   const [_, search, type, rarity] = queryKey;
 
+  let url = `${apiUrl.cards}?page=${pageParam}&pageSize=${limit}`;
   let query = "";
-  if (search) query += `name:${search}*`;
-  if (type) query += query ? ` AND types:${type}` : `types:${type}`;
-  if (rarity) query += query ? ` AND rarity:${rarity}` : `rarity:${rarity}`;
 
-  const response = await fetch(
-    `${apiUrl.cards}?page=${pageParam}&pageSize=${limit}&q=${encodeURIComponent(
-      query
-    )}`
-  );
+  if (search) query += `name:"*${encodeURIComponent(search)}*"`;
+
+  if (type) query += `${query ? " " : ""}types:"${encodeURIComponent(type)}"`;
+
+  if (rarity)
+    query += `${query ? " " : ""}rarity:"${encodeURIComponent(rarity)}"`;
+
+  if (query) url += `&q=${query}`;
+
+  const response = await fetch(url, {
+    headers: {
+      "X-Api-Key": apiKey,
+    },
+  });
 
   if (!response.ok) {
     throw new Error("Failed to fetch card data");

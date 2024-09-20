@@ -19,11 +19,10 @@ import { moderateScale, scale, verticalScale } from "react-native-size-matters";
 
 const Filter = () => {
   const router = useRouter();
-  const { data, error, isLoading, isError } = useRarities();
+  const { data, isLoading, isError } = useRarities();
 
   const {
     data: cardType,
-    error: cardError,
     isLoading: cardIsLoading,
     isError: cardIsError,
   } = useCardType();

@@ -42,7 +42,7 @@ const Cards = () => {
     isFetchingNextPage,
     refetch,
     isFetching,
-  } = useCardFilter(stringWithoutSpacesText, type, "");
+  } = useCardFilter(stringWithoutSpacesText, type, rarity);
 
   const filterCardData = filterData?.pages.flatMap((page) => page.data) || [];
 
