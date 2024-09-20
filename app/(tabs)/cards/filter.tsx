@@ -39,10 +39,7 @@ const Filter = () => {
     updateType(typeSelected);
     updateRarity(raritySelected);
 
-    router.navigate({
-      pathname: "/cards",
-      params: { type: typeSelected, rarity: raritySelected },
-    });
+    router.navigate("/cards");
   };
 
   if (isError || cardIsError) return <NotFound />;

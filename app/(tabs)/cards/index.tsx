@@ -6,6 +6,7 @@ import { useCardFilter } from "@/src/hooks/useQuery";
 import CardHeader from "@/src/screens/cards/CardHeader";
 import CardListItem from "@/src/screens/cards/CartListItem";
 import SearchAndFilter from "@/src/screens/cards/SearchAndFilter";
+import { useStore } from "@/src/store/store";
 import { stringWithoutSpaces } from "@/src/utils/stringWithoutSpaces";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
@@ -21,10 +22,8 @@ import {
 import { verticalScale } from "react-native-size-matters";
 
 const Cards = () => {
-  const { type, rarity } = useLocalSearchParams<{
-    type: string;
-    rarity: string;
-  }>();
+  const type = useStore.getState().typeSelected;
+  const rarity = useStore.getState().raritySelected;
 
   const [errModal, setErrModal] = useState({ status: false, errMsg: "" });
 

@@ -19,16 +19,17 @@ export const fetchfilterCards = async ({ pageParam = 1, queryKey }: Props) => {
   const [_, search, type, rarity] = queryKey;
 
   let url = `${apiUrl.cards}?page=${pageParam}&pageSize=${limit}`;
-  let query = "";
+  let query = [];
 
-  if (search) query += `name:"*${encodeURIComponent(search)}*"`;
+  if (search) query.push(`name:"*${encodeURIComponent(search)}*"`);
 
-  if (type) query += `${query ? " " : ""}types:"${encodeURIComponent(type)}"`;
+  if (type) query.push(`types:"${encodeURIComponent(type)}"`);
 
-  if (rarity)
-    query += `${query ? " " : ""}rarity:"${encodeURIComponent(rarity)}"`;
+  if (rarity) query.push(`rarity:"${encodeURIComponent(rarity)}"`);
 
-  if (query) url += `&q=${query}`;
+  if (query.length > 0) {
+    url += `&q=${query.join(" ")}`; // Combine with space, forming one single `q`
+  }
 
   const response = await fetch(url, {
     headers: {
