@@ -9,6 +9,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
+  Platform,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -60,7 +61,12 @@ const Filter = () => {
         />
       </Pressable>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: verticalScale(20) }}>
+      <ScrollView
+        contentContainerStyle={{
+          paddingBottom:
+            Platform.OS === "ios" ? verticalScale(20) : verticalScale(70),
+        }}
+      >
         <GridView
           data={cardType?.data}
           headerText="Types"

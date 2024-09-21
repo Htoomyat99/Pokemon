@@ -1,7 +1,7 @@
 import { fetchRate } from "@/constants/FetchRateLimit";
 
-const apiKey = "8f2aef6b-6b1f-4c1c-8f6e-6b1f8f6e8f6e";
-const url = "https://api.pokemontcg.io/v2";
+const apiKey = process.env.EXPO_PUBLIC_API_KEY as string;
+const url = process.env.EXPO_PUBLIC_API_URL as string;
 const limit = fetchRate.limit;
 
 const apiUrl = {
