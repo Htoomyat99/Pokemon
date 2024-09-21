@@ -25,7 +25,7 @@ export const fetchfilterCards = async ({ pageParam = 1, queryKey }: Props) => {
 
   if (type) query.push(`types:"${encodeURIComponent(type)}"`);
 
-  if (rarity) query.push(`rarity:"${encodeURIComponent(rarity)}"`);
+  if (rarity) query.push(`rarity:"${rarity}"`);
 
   if (query.length > 0) {
     url += `&q=${query.join(" ")}`; // Combine with space, forming one single `q`
